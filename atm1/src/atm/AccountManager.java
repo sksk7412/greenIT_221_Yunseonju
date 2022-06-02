@@ -11,6 +11,7 @@ public class AccountManager {
 		int index = -1;
 		int usercode = -1;
 		Scanner in = new Scanner(System.in);
+		
 		System.out.println("아이디: ");
 		String id = in.next();
 		System.out.println("비밀번호: ");
@@ -25,18 +26,37 @@ public class AccountManager {
 		}
 		
 		if(run) {
-			//if() {
-				System.out.println("축하합니다!!");
-				System.out.println("== 계좌 생성 완료==");
+			System.out.println("1.계좌 개설 2.계좌 삭제");
+			int sel = in.nextInt();
+			
+			if(sel == 1) {
+				if(UserManager.user.get(index).getAccCnt() < 3) {
+					System.out.println("축하합니다!!");
+					System.out.println("== 계좌 생성 완료==");
+					
+					Account temp = new Account(usercode, 1 + UserManager.user.get(index).getAccCnt() ,1000);
+					account.add(temp);
+					System.out.println("가입비 천원 입금해드렸습니다.");
+					
+					UserManager.user.get(index).setAccCnt( 1 + UserManager.user.get(index).getAccCnt());
+	
+				}
+				else
+					System.out.println("아이디 한개당 최대 계좌 개설은 3개까지 가능합니다.");
+			}
+			else if(sel == 2) {
 				
-				Account temp = new Account(usercode, account.size() + 1 ,1000);
-				account.add(temp);
-				System.out.println("가입비 천원 입금해드렸습니다.");
+				for(int i =0; i < UserManager.user.get(index).getAccCnt(); i++) {
+					System.out.println("고객님의 계좌");
+					System.out.println((i+1) +". "+"계좌번호: "+ account.get(index).getAccNum() +"  money: " +account.get(index).getMoney());
+				}
+				System.out.println("삭제할 계좌 번호 입력:");
+				int num = in.nextInt();
 				
-				UserManager.user.get(index).setAccCnt( 1 + UserManager.user.get(index).getAccCnt());
-	//		}
-		//	else
-	//			System.out.println("아이디 한개당 3개까지 계좌개설이 가능합니다.");
+				System.out.println(num);
+			}
+			else
+				System.out.println("다시 선택하세요.");
 		}
 		else
 			System.out.println("아이디나 비밀번호가 옳지 않습니다.");
