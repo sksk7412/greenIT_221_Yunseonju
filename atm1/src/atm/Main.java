@@ -17,7 +17,8 @@ public class Main {
 		// bank run?
 		
 //		Bank.instance.setName("Green");
-		Bank.instance.run();
+		Bank bank = new Bank();
+		bank.run();
 	}
 
 }

@@ -1,21 +1,28 @@
 package atm;
 
 public class User {
-	private int code, accCnt;
-	private String id,pw;
-	private String name;
+	String id;
+	String pw;
+	Account[] accList;
+	int accCount;
 
-	public User(int code, String name, String id ,String pw) {
-		this.code = code;
+	public User(String id ,String pw) {
 		this.id = id;
 		this.pw = pw;
-		this.name = name;
 	}	
-	public int getCode() {
-		return this.code;
+	
+	public User(String id, String pw, Account[] accList, int accCount) {
+		this.id = id;
+		this.pw = pw;
+		this.accList = accList;
+		this.accCount = accCount;
+	}
+	
+	public Account[] getAccList() {
+		return this.accList;
 	}
 	public int getAccCnt() {
-		return this.accCnt;
+		return this.accCount;
 	}
 	public String getId() {
 		return this.id;
@@ -23,10 +30,7 @@ public class User {
 	public String getPw() {
 		return this.pw;
 	}
-	public String getName() {
-		return this.name;
-	}
-	public void setAccCnt(int accCnt) {
-		this.accCnt = accCnt;
+	public void setAccCnt(int accCount) {
+		this.accCount = accCount;
 	}
 }

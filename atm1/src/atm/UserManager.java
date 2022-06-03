@@ -1,13 +1,15 @@
 package atm;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserManager {
-//	Scanner in = new Scanner(System.in);
-	public static ArrayList<User> user = new ArrayList<>();
 	
-	public static void createId() {
+	static UserManager instance = new UserManager(); 
+	
+	User[] userList;
+	int userCount;
+	
+	public void createId() {
 		boolean run = true;
 		Scanner in = new Scanner(System.in);
 		
@@ -15,50 +17,65 @@ public class UserManager {
 		int sel = in.nextInt();
 		
 		if(sel == 1) {
-			
-			System.out.println("이 름: ");
-			String name = in.next();
 			System.out.println("생성할 아이디: ");
 			String id = in.next();
 			System.out.println("생성할 비밀번호: ");
 			String pw = in.next();
 			
-			if(user.size() == 0) {
-				User temp = new User(user.size()+1,name,id,pw);
-				user.add(temp);
+			// 유저가 한명도 없을경우
+			if(userCount == 0) {
+				userList =  new User[userCount + 1];
+				userList[userCount] = new User(id,pw);		
 				System.out.println("생성 완료.");
+				userCount++;
 
 			}
+			//유저가 1명이상일 경우 
 			else {
-				for(int i = 0; i < user.size(); i++) {
-					if(user.get(i).getId().equals(id)) {
+				//아이디 중복 검사
+				for(int i = 0; i < userCount; i++) {
+					if(userList[i].getId().equals(id)) {
 						run = false;
 					}
 				}
-				
+				//아이디 중복이 참이면 if문을 돌아 아이디 생성
 				if(run) {
-					User temp = new User(user.size()+1,name,id,pw);
-					user.add(temp);
+					User temp[] = userList;
+					userList = new User[userCount + 1];
+					for(int i =0; i < userCount; i++) {
+						userList[i] = temp[i];
+					}
+					
+					userList[userCount] = new User(id,pw);
 					System.out.println("생성 완료.");
+					userCount++;
 				}
 				else
 					System.out.println("이미 존재하는 아이디입니다.");
 			}
 		}
 		else if(sel == 2) {
-			boolean runs = false;
+			int index = -1;
 			System.out.println("탈퇴할 아이디: ");
 			String id = in.next();
 			System.out.println("비밀번호: ");
 			String pw = in.next();
 			
-			for(int i = 0; i < user.size(); i++) {
-				if(user.get(i).getId().equals(id) && user.get(i).getPw().equals(pw)) {
-					user.remove(i);
-					runs = true;
+			for(int i = 0; i < userCount; i++) {
+				if(userList[i].getId().equals(id) && userList[i].getPw().equals(pw)) {
+					index = i;
 				}
 			}
-			if(runs) {
+			if(index != -1) {
+				int j = 0;
+				User temp[] = userList;
+				userList = new User[userCount - 1];
+				for(int i = 0; i < userCount; i++) {
+					if(index != i) {
+						userList[j] = temp[i];
+						j++;
+					}
+				}		
 				System.out.println("탈퇴 완료");
 			}
 			else
@@ -66,6 +83,34 @@ public class UserManager {
 		}
 		else
 			System.out.println("다시 선택하세요.");
-	
 	}
+	//계좌 생성
+	public void createAccount() {
+		
+	}
+	//계좌 삭제
+	public void deleteAcc() {
+		
+	}
+	//입금
+	public void income() {
+		
+	}
+	//출금
+	public void withdraw() {
+		
+	}
+	//이체
+	public void transfer() {
+		
+	}
+	//계좌 조회
+	public void lookupAcc() {
+		
+	}
+
 }
+
+
+
+
