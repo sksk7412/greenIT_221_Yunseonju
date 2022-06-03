@@ -1,10 +1,10 @@
 package atm;
 
 public class User {
-	String id;
-	String pw;
-	Account[] accList;
-	int accCount;
+	String id;			// 고객의 아이디
+	String pw;			// 고객의 비밀번호
+	Account[] accList;	// 고객의 계좌정보 (계좌번호 및 잔액)
+	int accCount;       // 고객의 계좌개수
 
 	public User(String id ,String pw) {
 		this.id = id;
@@ -17,6 +17,8 @@ public class User {
 		this.accList = accList;
 		this.accCount = accCount;
 	}
+	
+	//고개의 정보출력 구문
 	public void infoPrint() {
 		System.out.println("아이디\t비밀번호\t계좌정보");
 		if(accCount == 0) {

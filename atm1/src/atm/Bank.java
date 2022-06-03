@@ -5,8 +5,7 @@ import java.util.Scanner;
 public class Bank {
 	boolean run = true;
 	static Scanner in = new Scanner(System.in);
-//	public static Bank instance = new Bank();
-	public static int log = -1;
+	public static int log = -1; // 로그인 확인 static 변수
 	
 	UserManager usermanager = UserManager.instance;
 	FileManager fileManager = FileManager.instance;
@@ -27,10 +26,12 @@ public class Bank {
 	}
 	public void logIn() {
 		while(true) {
+			FileManager.instance.save();
 			
+			//고객 정보 출력
 			usermanager.userList[log].infoPrint();
-			System.out.println("[" + usermanager.userList[log].getId() + "님, 로그인]");
 			
+			System.out.println("[" + usermanager.userList[log].getId() + "님, 로그인]");		
 			System.out.println("[1]계좌생성");
 			System.out.println("[2]입금하기");
 			System.out.println("[3]출금하기");
@@ -42,12 +43,12 @@ public class Bank {
 			System.out.print("메뉴를 선택하세요 : ");
 			int choice = in.nextInt();
 			
-			if(choice == 1) { usermanager.createAccount();;}
-			else if(choice == 2) { usermanager.income(); }
-			else if(choice == 3) { usermanager.withdraw(); }
-			else if(choice == 4) { usermanager.transfer(); }
-			else if(choice == 5) { usermanager.lookupAcc(); }
-			else if(choice == 6) { usermanager.deleteAcc(); }
+			if(choice == 1) { usermanager.createAccount();} 	// 계좌 생성
+			else if(choice == 2) { usermanager.income(); }  	// 입금
+			else if(choice == 3) { usermanager.withdraw(); } 	// 출금
+			else if(choice == 4) { usermanager.transfer(); } 	// 이체
+			else if(choice == 5) { usermanager.lookupAcc(); } 	// 조회
+			else if(choice == 6) { usermanager.deleteAcc(); } 	// 계좌 삭제
 			else if(choice == 0) { 
 				log = -1;
 				System.out.println("[메세지]로그아웃되었습니다.");
@@ -66,7 +67,7 @@ public class Bank {
 		for(int i =0; i < usermanager.userCount; i++){
 			if(usermanager.userCount != 0 && usermanager.userList[i].getId().equals(id) && usermanager.userList[i].getPw().equals(pw)) {
 				check = true;
-				log = i; //사용의 용이를 위해 log값을 index로 저장한다.
+				log = i;	 //사용의 용이를 위해 log값을 index로 저장한다.
 			}
 		}
 		if(check) {

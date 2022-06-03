@@ -1,27 +1,24 @@
 package atm;
 
-import java.util.Scanner;
-
 public class UserManager {
 	
 	static UserManager instance = new UserManager(); 
 	
-	User[] userList;
-	int userCount;
-	static int accNumber = 1000;
+	User[] userList;			  // 고객의 정보배열
+	int userCount;                // 고객수 카운트
+	static int accNumber = 1000;  // 계좌번호 시작점
 	
 	public void createId() {
 		boolean run = true;
-		Scanner in = new Scanner(System.in);
 		
 		System.out.println("1.회원가입 2.회원탈퇴");
-		int sel = in.nextInt();
+		int sel = Bank.in.nextInt();
 		
 		if(sel == 1) {
 			System.out.println("생성할 아이디: ");
-			String id = in.next();
+			String id = Bank.in.next();
 			System.out.println("생성할 비밀번호: ");
-			String pw = in.next();
+			String pw = Bank.in.next();
 			
 			// 유저가 한명도 없을경우
 			if(userCount == 0) {
@@ -39,7 +36,7 @@ public class UserManager {
 						run = false;
 					}
 				}
-				//아이디 중복이 참이면 if문을 돌아 아이디 생성
+				//아이디 중복이 참이면 아이디 생성
 				if(run) {
 					User temp[] = userList;
 					userList = new User[userCount + 1];
@@ -59,9 +56,9 @@ public class UserManager {
 		else if(sel == 2) {
 			int index = -1;
 			System.out.println("탈퇴할 아이디: ");
-			String id = in.next();
+			String id = Bank.in.next();
 			System.out.println("비밀번호: ");
-			String pw = in.next();
+			String pw = Bank.in.next();
 			
 			//아이디 true / false 확인절차
 			for(int i = 0; i < userCount; i++) {
@@ -94,10 +91,13 @@ public class UserManager {
 		User temp = userList[Bank.log];	
 		
 		System.out.println("=== 계좌는 아이디 1개당 최대 3개까지 개설이 가능합니다. ===");
+		
+		//고객의 계좌생성 조건
 		if(temp.accCount > 2) {
 			System.out.println("생성할 수 있는 계좌를 초과하였습니다.");
 		}
-		else {																									 
+		else {
+			//계좌 배열생성
 			if(temp.accCount == 0) {
 				temp.accList = new Account[temp.accCount + 1];
 			}
@@ -129,11 +129,14 @@ public class UserManager {
 			
 			System.out.println("삭제할 계좌번호: ");
 			int number = Bank.in.nextInt();
+			
+			//계좌 확인 절차
 			for(int i = 0; i< temp.accCount; i++ ) {
 				if(temp.accList[i].number.equals(String.valueOf(number))) {
 					accNumberIndex = i;
 				}
 			}
+			//삭제 처리
 			if(accNumberIndex != -1) {
 				if(temp.accCount == 1) {
 					temp.accList = null;
@@ -167,16 +170,19 @@ public class UserManager {
 		if(temp.accCount > 0) {
 			
 			int check = -1;
+			//계좌 출력
 			userList[Bank.log].infoPrint();
 			
 			System.out.println("입금할 계좌번호: ");
 			int accNumberIndex = Bank.in.nextInt();
 			
+			//입금 계좌 확인
 			for(int i =0; i < temp.accCount; i++) {
 				if(temp.accList[i].number.equals(String.valueOf(accNumberIndex))) {
 					check = i;
 				}
 			}
+			//입금 과정
 			if(check != -1) {
 				System.out.println("입금할 금액: ");
 				int cash = Bank.in.nextInt();
@@ -203,11 +209,13 @@ public class UserManager {
 			System.out.println("출금할 계좌번호: ");
 			int accNumberIndex = Bank.in.nextInt();
 			
+			//출금 계좌 확인
 			for(int i =0; i < temp.accCount; i++) {
 				if(temp.accList[i].number.equals(String.valueOf(accNumberIndex))) {
 					check = i;
 				}
 			}
+			//출금 과정
 			if(check != -1){
 				System.out.println("출금할 금액: ");
 				int cash = Bank.in.nextInt();
@@ -231,42 +239,48 @@ public class UserManager {
 		User temp = userList[Bank.log];
 		if(temp.accCount > 0) {
 			
-			for(int i = 0; i < userCount; i++) {
-				userList[i].infoPrint();
-			}
+			userList[Bank.log].infoPrint();
+			
 			System.out.println("이체할 계좌번호: ");
 			int accNum = Bank.in.nextInt();
 			
+			//이체할 계좌 확인
 			for(int i =0; i < userCount; i++) {
-				for(int j =0; j < temp.accCount; j++) {
-					if(userList[i].accList[j].number.equals(String.valueOf(accNum))) {
-						accIndex = j;
-					}
+				if(temp.accList[i].number.equals(String.valueOf(accNum))) {
+					accIndex = i;
 				}
 			}
-			
 			if(accIndex != -1) {
 				int checkSendIndex1 = -1;
 				int checkSendIndex2 = -1;
+				
+				//계좌 전체 출력
 				for(int i = 0; i < userCount; i++) {
 					userList[i].infoPrint();
 				}
+				
 				System.out.println("입금할 계좌번호: ");
 				int sendAccIndex = Bank.in.nextInt();
 				System.out.println("이체금액: ");
 				int cash = Bank.in.nextInt();
 				
+				//전체 계좌에서 계좌 탐색.
 				for(int i =0; i < userCount; i++) {
 					for(int j =0; j < temp.accCount; j++) {
-						if(userList[i].accList[j].number.equals(String.valueOf(accNum))) {
+						if(userList[i].accList[j].number.equals(String.valueOf(sendAccIndex))) {
 							checkSendIndex1 = i;
 							checkSendIndex2 = j;
 						}
 					}
 				}
-				
+				//로그인 한 계좌가 아닌 다른계좌를 이체계좌로 선택한 경우 방지
+				if(temp.accList[accIndex].number.equals(userList[checkSendIndex1].accList[checkSendIndex2].number)) {
+					checkSendIndex2 = -1;
+				}
+				//이체 과정
 				if(checkSendIndex2 != -1) {
 					
+					//이체한 계좌 잔액 체크
 					if(temp.accList[accIndex].money >= cash) {
 						
 						temp.accList[accIndex].money -= cash;
