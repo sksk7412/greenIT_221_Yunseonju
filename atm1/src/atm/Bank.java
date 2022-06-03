@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Bank {
 	boolean run = true;
-	Scanner in = new Scanner(System.in);
+	static Scanner in = new Scanner(System.in);
 //	public static Bank instance = new Bank();
 	public static int log = -1;
 	
@@ -27,7 +27,10 @@ public class Bank {
 	}
 	public void logIn() {
 		while(true) {
+			
+			usermanager.userList[log].infoPrint();
 			System.out.println("[" + usermanager.userList[log].getId() + "님, 로그인]");
+			
 			System.out.println("[1]계좌생성");
 			System.out.println("[2]입금하기");
 			System.out.println("[3]출금하기");
@@ -52,7 +55,7 @@ public class Bank {
 			}
 		}
 	}
-	
+	//로그인을 위한 아아디 및 비밀번호 check
 	public void logInCheck() {
 		boolean check =  false;
 		System.out.println("아이디: ");
@@ -61,9 +64,9 @@ public class Bank {
 		String pw = in.next();
 		
 		for(int i =0; i < usermanager.userCount; i++){
-			if(usermanager.userList[i].getId().equals(id) && usermanager.userList[i].getPw().equals(pw)) {
+			if(usermanager.userCount != 0 && usermanager.userList[i].getId().equals(id) && usermanager.userList[i].getPw().equals(pw)) {
 				check = true;
-				log = i;
+				log = i; //사용의 용이를 위해 log값을 index로 저장한다.
 			}
 		}
 		if(check) {
