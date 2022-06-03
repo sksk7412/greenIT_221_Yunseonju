@@ -77,6 +77,7 @@ public class Bank {
 			System.out.println("사용자 정보를 다시 확인해주세요.");
 	}
 	public void run() {
+		FileManager.instance.load();
 		while(run) {
 			menu();
 		}
