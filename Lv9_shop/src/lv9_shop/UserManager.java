@@ -5,8 +5,8 @@ import java.util.Vector;
 
 public class UserManager {
 	Random ran = new Random();
-	Vector<User> userList = new Vector<>();
-	int userLog = -1;
+	 Vector<User> userList = new Vector<>();
+	 int userLog = -1;
 	
 	// 회원가입
 	public void join() {

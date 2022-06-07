@@ -45,7 +45,7 @@ public class ItemManager {
 		int numSecond = 0;
 		for(int i = 0; i < itemList.size(); i++ ) {
 			if(itemList.get(i).getCategory().equals(temp)) {
-				System.out.printf("%d. %s\n",++num,itemList.get(i).getItemName());	
+				System.out.printf("%d. %s [%s(won)]\n",++num,itemList.get(i).getItemName(),itemList.get(i).getPrice());	
 			}
 		}	
 		
@@ -72,11 +72,106 @@ public class ItemManager {
 		return null;
 	}
 	//장바구니 출력
-	public void printCartList() {
+	public void printCartList(User e) {
 		
+		for(int i = 0; i < cartList.size(); i++) {
+			if(cartList.get(i).getUserId().equals(e.getId())) {
+				System.out.printf("%d. %s", i+1, cartList.get(i).getItemName());
+			}
+			for(int j = 0; j < itemList.size(); j++) {
+				if(itemList.get(j).getItemName().equals(cartList.get(i).getItemName())) {
+					System.out.printf("[%d(won)]\n",itemList.get(j).getPrice());	
+				}
+			}
+		}	
 	}
+
+	//장바구니 목록 삭제
+	public void deletemenu(User e) {
+		boolean check = false;
+		//상품이 있는지 체크
+		for(int i = 0; i < cartList.size(); i++) {
+			if(cartList.get(i).getUserId().equals(e.getId())){
+				check = true;
+			}
+		}
+		if(check) {
+			printCartList(e);
+			
+			System.out.println("삭제할 상품 선택: ");
+			int sel = Shop.in.nextInt()-1;
+			
+			int num = 0;
+			int deleteItem = -1;
+			for(int i = 0; i < cartList.size(); i++) {
+				if(cartList.get(i).getUserId().equals(e.getId())) {	
+					if(sel == num) {
+						deleteItem = i;
+					}
+					num++;
+				}
+			}
+			if(deleteItem != -1) {
+				cartList.remove(deleteItem);
+				System.out.println(" 삭제 완료 ");
+			}
+			else
+				System.out.println("다시 선택하세요.");
+			
+		}
+		else
+			System.out.println("상품을 먼저 장바구니에 넣어주세요.");
+	}
+	
+	//물건구매
+	public int buyitems(User e , int sel) {
+		boolean check = false;
+		//상품이 있는지 체크
+		for(int i = 0; i < cartList.size(); i++) {
+			if(cartList.get(i).getUserId().equals(e.getId())){
+				check = true;
+			}
+		}
+		
+		int cash = -1;  // 리턴할 물건 가격
+		int num = 0;   // 체크용 변수
+		int deleteItem = -1;  //삭제할 장바구니 인덱스
+		if(check) {
+			
+			for(int i = 0; i < cartList.size(); i++) {
+				if(cartList.get(i).getUserId().equals(e.getId())) {	
+					
+					if(sel == num) {
+						deleteItem = i;
+					}
+					num++;
+				}
+			}
+			
+			if(deleteItem != -1) {
+				
+				//장바구니 물건 가격 찾기.
+				for(int i = 0; i < itemList.size(); i++) {
+					if(itemList.get(i).getItemName().equals(cartList.get(deleteItem).getUserId())) {
+						cash = itemList.get(i).getPrice();
+					}
+				}
+				
+				cartList.remove(deleteItem); //장바구니 물건 remove
+				return cash;
+			}
+			else
+				System.out.println("다시 선택하세요.");
+			
+		}
+		else
+			System.out.println("상품을 먼저 장바구니에 넣어주세요.");
+		
+		return -1;
+		
+	} 
 	//카테고리 추가
-	void addCategory() {
+	public void addCategory() {
 		System.out.println("[카테고리추가] 카테고리 이름을 입력하세요. ");
 		String name = Shop.in.next();
 		category.add(name);
