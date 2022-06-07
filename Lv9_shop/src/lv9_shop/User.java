@@ -11,7 +11,6 @@ public class User {
 		this.pw = pw;
 		this.money = money;
 	}
-	
 	//get
 	public String getId() {
 		return id;

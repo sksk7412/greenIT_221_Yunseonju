@@ -104,16 +104,14 @@ public class Shop {
 		
 		// 로그 랑 번호
 		int cash = im.buyitems(um.userList.get(um.userLog), sel);
-		
-		System.out.println("cash: "+ cash);
-		
+			
 		if(cash != -1) {
 			
 			if(userCash - cash >= 0 ) {
 				int result = userCash - cash;
 				um.userList.get(um.userLog).setMoney(result);
 				System.out.println("구매 완료.");
-				System.out.printf("남은 현금: [%d]\n",um.userList.get(um.userLog).getMoney());
+				System.out.printf("남은 현금: [%d]\n",um.userList.get(um.userLog).getMoney());	
 			}
 			else
 				System.out.println("현금이 부족합니다.");
@@ -122,11 +120,77 @@ public class Shop {
 	}
 	//관리자
 	public void managermenu() {
-		//TODO
+		String mId = "windy5";
+		String mPassword ="windy5";
+		
+		System.out.println("관리자 ID: ");
+		String Cid = in.next();
+		System.out.println("관리자 Password: ");
+		String Cpassword = in.next();
 		
 		//카테고리 관리 - 추가 삭제 수정
 		//상품 관리 - 추가 삭제 수정
 		//유저 관리 - 추가 삭제 수정
 		
+		if(mId.equals(Cid) && mPassword.equals(Cpassword)) {
+			while(true) {
+				System.out.println("1.카테고리 관리 2. 상품 관리 3.유저 관리 0.뒤로가기");
+				int sel = in.nextInt();
+				
+				if(sel == 1) categoryManager();
+				else if(sel == 2) itemManager();
+				else if(sel == 3) userManager();
+				else if(sel == 0) break;
+				else
+					System.out.println("다시 입력하세요.");
+			}
+		}
+		else
+			System.out.println("관리자 정보를 다시 확인해주세요.");
 	}
+	
+	//카테고리 관리 - 추가 삭제 수정
+	public void categoryManager() {
+		while (true) {
+			System.out.println("[1.전체카테고리] [2.카테고리추가] [3.카테고리삭제] [0.뒤로가기]");
+			int sel = in.nextInt();
+			if (sel == 1) im.printCategory();
+			else if(sel == 2) im.addCategory();
+			else if(sel == 3) im.deleteCategory();
+			else if (sel == 0) break;
+			else
+				System.out.println("다시 입력하세요.");		
+		}
+		
+	}
+	//상품 관리 - 추가 삭제 수정
+	public void itemManager() {
+		while(true) {
+			System.out.println("[1.전체 상품] [2.상품 추가] [3.상품 삭제] [0.뒤로가기]");	
+			int sel = in.nextInt();
+			if (sel == 1) im.printAllItem();
+			else if(sel == 2) im.addItem();
+			else if(sel == 3) im.deleteItem();
+			else if (sel == 0) break;
+			else
+				System.out.println("다시 입력하세요.");	
+		}
+			
+	}
+	//유저 관리 - 추가 삭제 수정
+	public void userManager() {
+		while(true) {
+			System.out.println("[1.전체 유저] [2.유저 추가] [3.유저 삭제] [0.뒤로가기]");	
+			int sel = in.nextInt();
+			if (sel == 1) um.printUser();
+			else if(sel == 2) um.join();
+			else if(sel == 3) um.deleteUser();
+			else if (sel == 0) break;
+			else
+				System.out.println("다시 입력하세요.");	
+		}
+		
+	}
+	
+	
 }

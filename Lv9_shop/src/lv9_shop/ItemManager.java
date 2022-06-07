@@ -2,6 +2,7 @@ package lv9_shop;
 
 import java.util.Vector;
 
+
 public class ItemManager {
 	
 	Vector<String> category = new Vector<>(); // 카테고리 정보
@@ -36,6 +37,12 @@ public class ItemManager {
 	public void printCategory() {
 		for(int i =0; i < category.size(); i++) {
 			System.out.printf("[%d]. %s\n",i+1,category.get(i));
+		}
+	}
+	//상품 전체 출력
+	public void printAllItem() {
+		for(int i = 0; i < itemList.size(); i++){
+			System.out.printf("%d. %s [%d(won)]",i+1, itemList.get(i).getItemName(), itemList.get(i).getPrice());
 		}
 	}
 	//상품 출력
@@ -152,7 +159,7 @@ public class ItemManager {
 				
 				//장바구니 물건 가격 찾기.
 				for(int i = 0; i < itemList.size(); i++) {
-					if(itemList.get(i).getItemName().equals(cartList.get(deleteItem).getUserId())) {
+					if(itemList.get(i).getItemName().equals(cartList.get(deleteItem).getItemName())) {
 						cash = itemList.get(i).getPrice();
 					}
 				}
@@ -170,10 +177,62 @@ public class ItemManager {
 		return -1;
 		
 	} 
+	
 	//카테고리 추가
 	public void addCategory() {
 		System.out.println("[카테고리추가] 카테고리 이름을 입력하세요. ");
 		String name = Shop.in.next();
 		category.add(name);
+	}
+	//카테고리 삭제
+	public void deleteCategory() {
+		boolean check = false;
+		System.out.println("[카테고리삭제] 카테고리 이름을 입력하세요: ");
+		String name = Shop.in.next();
+		
+		for(int i = 0; i < category.size(); i++) {
+			if(category.get(i).equals(name)) {
+				check = true;
+			}
+		}
+		
+		if(check) {
+			category.remove(name);
+		}
+		else
+			System.out.println("카테고리를 다시 한 번 확인해주세요.");
+	}
+	//아이템 추가
+	public void addItem() {
+		System.out.println("[아이템추가] 아이템이름을 입력하세요: ");
+		String name =  Shop.in.next();
+		System.out.println("[아이템추가] 가격을 입력하세요: ");
+		int price =  Shop.in.nextInt();
+		printCategory();
+		System.out.println("[아이템추가] 카테고리를 입력하세요: ");
+		int sel =  Shop.in.nextInt();
+		Item temp = new Item(name,category.get(sel),price);
+		itemList.add(temp);
+		
+	}
+	//아이템 삭제
+	public void deleteItem() {
+		int check = -1;
+		System.out.println("[아이템삭제] 아이템 이름을 입력하세요: ");
+		String name = Shop.in.next();
+		
+		for(int i = 0; i < itemList.size(); i++) {
+			if(itemList.get(i).getItemName().equals(name)) {
+				check = i;
+			}
+		}
+		
+		if(check != -1) {
+			itemList.remove(check);
+			System.out.println("삭제 완료.");
+		}
+		else
+			System.out.println("아이템 이름을 다시 확인해주세요.");
+		
 	}
 }
