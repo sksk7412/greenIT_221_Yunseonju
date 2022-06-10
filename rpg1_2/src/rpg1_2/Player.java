@@ -2,12 +2,12 @@ package rpg1_2;
 
 public class Player {
 	
-	static int money;
+	static int money; 					//플레이어 골드
 	static Guild guild = new Guild();
 	static Inventory inven = new Inventory();
 	
 	public Player() {
-		money = 100000;
+		money = 300000;
 		guild.set();
 	}
 	public void guildMenu() {
@@ -16,7 +16,6 @@ public class Player {
 	}
 
 	public void invenMenu() {
-		// TODO Auto-generated method stub
 		inven.mainMenu();
 	}
 

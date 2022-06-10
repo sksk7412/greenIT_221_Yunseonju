@@ -9,11 +9,11 @@ public class Guild {
 	Unit[] partyList = new Unit[4];
 	
 	public void set() {
-		Unit temp = new Unit("김지영", 1, 50, 50, 18, 20, true);
+		Unit temp = new Unit("김지연", 1, 50, 50, 18, 20, true);
 		guildList.add(temp);
 		temp = new Unit("킬리언 머피", 1, 60, 60, 16, 33, true);
 		guildList.add(temp);
-		temp = new Unit("베네딕트", 1, 40, 40, 22, 32, true);
+		temp = new Unit("포스트 말론", 1, 40, 40, 22, 32, true);
 		guildList.add(temp);
 		temp = new Unit("제임스 할로우", 1, 45, 45, 35, 26, true);
 		guildList.add(temp);
@@ -40,22 +40,36 @@ public class Guild {
 	public void mainMenu() {
 		
 		while(true) {
+			System.out.println("[ Player Gold: " + Player.money+" ]");
 			System.out.println("\t=== [Guild Menu] ===");
 			System.out.println("1.길드원 목록 2.길드원 장비현황 3.길드원 추가 4.길드원 방출");
-			System.out.println("5.파티원 교체 0.뒤로가기");
+			System.out.println("5.파티원 목록 6.파티원 교체 0.뒤로가기");
 			int sel = Game.in.nextInt();
 			
 			if(sel == 1) printGuildList();
 			else if(sel == 2) printItemMember();
 			else if(sel == 3) addMember();
 			else if(sel == 4) deleteMember();
-			else if(sel == 5) changeMember();
+			else if(sel == 5) printParty();
+			else if(sel == 6) changeMember();
 			else if(sel == 0) break;
 			else
 				System.out.println("다시 선택하세요.");
 		}
 	}
 	
+	private void printParty() {
+		int index = 0;
+		System.out.println("=== [Party MemberList] ===");
+		for(int i = 0; i < guildList.size(); i++) {
+			if(guildList.get(i).party == true) {
+				System.out.printf("[%d] ",index+1);
+				guildList.get(i).printState();
+				System.out.println();
+			}
+		}
+	}
+
 	//길드원 출력
 	private void printGuildList() {
 		System.out.println("\t=== [Guild Member] ===");
@@ -79,20 +93,25 @@ public class Guild {
 	
 	//길드원 추가
 	private void addMember() {
-		String[] first = {"나타샤","마리","폴","소피","네드","핀","벤자민","데이비드","크리스토퍼"};
-		String[] second = {"프랭클린","콜","노블","간달프","레골라스","블룸","듀리프","모나한"};
-		String name = first[Game.ran.nextInt(first.length)] +" "+ second[Game.ran.nextInt(second.length)];
-		int lv = Game.ran.nextInt(5)+1;
-		int hp = Game.ran.nextInt(70)+20;
-		int atk = Game.ran.nextInt(70)+20;
-		int def = Game.ran.nextInt(70)+20;
-		
-		System.out.println(" [길드원 추가 완료] ");
-		System.out.printf("[Name: %s] [Level: %d] [Hp: %d/%d]\n",name,lv,hp,hp);
-		System.out.printf("[ATk: %d] [DEF: %d] [Party: %s]\n",atk,def,false);
+		if(Player.money >= 5000) {
+			String[] first = {"나타샤","마리","폴","소피","네드","핀","벤자민","데이비드","크리스토퍼"};
+			String[] second = {"프랭클린","콜","노블","간달프","레골라스","블룸","듀리프","모나한"};
+			String name = first[Game.ran.nextInt(first.length)] +" "+ second[Game.ran.nextInt(second.length)];
+			int lv = Game.ran.nextInt(5)+1;
+			int hp = Game.ran.nextInt(70)+20;
+			int atk = Game.ran.nextInt(70)+20;
+			int def = Game.ran.nextInt(70)+20;
 			
-		Unit temp = new Unit(name, lv, hp, hp, atk, def, false);
-		guildList.add(temp);
+			System.out.println(" [길드원 추가 완료] ");
+			System.out.printf("[Name: %s] [Level: %d] [Hp: %d/%d]\n",name,lv,hp,hp);
+			System.out.printf("[ATk: %d] [DEF: %d] [Party: %s]\n",atk,def,false);
+				
+			Unit temp = new Unit(name, lv, hp, hp, atk, def, false);
+			guildList.add(temp);
+			Player.money -= 5000;
+		}
+		else
+			System.out.println("골드가 부족합니다.");
 	}
 	//길드원 삭제
 	private void deleteMember() {
@@ -102,6 +121,18 @@ public class Guild {
 		int sel = Game.in.nextInt()-1;
 		
 		if(sel >= 0 && sel < guildList.size()) {
+			
+			//방출한 멤버가 파티 일경우
+			if(guildList.get(sel).party == true) {
+				
+				for(int i = 0; i < guildList.size(); i++) {
+					if(guildList.get(i).party == false) {
+						guildList.get(i).party = true;
+						break;
+					}
+				}
+				guildList.get(sel).party = false;
+			}
 			System.out.printf("[ '%s' 길드원을 방출합니다.] \n",guildList.get(sel).name);
 			guildList.remove(sel);
 		}

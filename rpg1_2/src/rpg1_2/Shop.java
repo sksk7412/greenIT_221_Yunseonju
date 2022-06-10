@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Shop {
 
-	ArrayList<Item> itemList = new ArrayList<>();	
+	static ArrayList<Item> itemList = new ArrayList<>();
 	
 	public Shop() {
 		Item temp = new Item(1,"나무검",10,1000);
@@ -27,12 +27,13 @@ public class Shop {
 		itemList.add(temp);
 	}
 	
+	//메인 메뉴
 	public void store() {
 		
 		while(true){
-			System.out.println("[ 플레이어 Money: " + Player.money+" ]");
+			System.out.println("[ Player Gold: " + Player.money+" ]");
 			System.out.println("=== [Store menu] ===");
-			System.out.println("1.무기 상점 2.방어구 상점 3.악세사리 상점");
+			System.out.println("[1.무기 상점] [2.방어구 상점] [3.악세사리 상점]");
 			System.out.println("0.뒤로가기");
 			int sel = Game.in.nextInt();
 			
@@ -53,6 +54,8 @@ public class Shop {
 				System.out.println("다시 선택하시오");
 		}
 	}
+	
+	//아이템 출력
 	public void printItem(int itemType) {
 		
 		int num = 0;
@@ -67,6 +70,7 @@ public class Shop {
 		buyItem(itemType);
 	}
 	
+	//아이템 구매
 	public void buyItem(int itemType) {
 		int check = -1;
 		int number = 0;
@@ -90,7 +94,12 @@ public class Shop {
 			int money = Player.money - itemList.get(check).price;
 			
 			if(money >= 0) {
-				Inventory.inven.add(itemList.get(check));
+				//아이템 재생성후 인벤토리저장 (강화문제)
+				String num = itemList.get(check).name;
+				Item temp = new Item(itemList.get(check).kind,"",itemList.get(check).power,itemList.get(check).price);
+				temp.setName(num);
+				
+				Inventory.inven.add(temp);
 				Player.money -= itemList.get(check).price;
 				System.out.println("물건 구매완료");
 			}
