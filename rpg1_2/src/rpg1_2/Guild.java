@@ -36,6 +36,12 @@ public class Guild {
 		}
 	}
 	
+	// TODO
+	// 치료소
+	// 부활소
+	// 아이템 수리부분
+	
+	
 	//메인메뉴
 	public void mainMenu() {
 		
@@ -97,10 +103,10 @@ public class Guild {
 			String[] first = {"나타샤","마리","폴","소피","네드","핀","벤자민","데이비드","크리스토퍼"};
 			String[] second = {"프랭클린","콜","노블","간달프","레골라스","블룸","듀리프","모나한"};
 			String name = first[Game.ran.nextInt(first.length)] +" "+ second[Game.ran.nextInt(second.length)];
-			int lv = Game.ran.nextInt(5)+1;
-			int hp = Game.ran.nextInt(70)+20;
-			int atk = Game.ran.nextInt(70)+20;
-			int def = Game.ran.nextInt(70)+20;
+			int lv = 1;
+			int hp = Game.ran.nextInt(35)+20;
+			int atk = Game.ran.nextInt(35)+20;
+			int def = Game.ran.nextInt(35)+20;
 			
 			System.out.println(" [길드원 추가 완료] ");
 			System.out.printf("[Name: %s] [Level: %d] [Hp: %d/%d]\n",name,lv,hp,hp);

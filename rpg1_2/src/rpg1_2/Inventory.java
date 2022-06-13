@@ -46,6 +46,7 @@ public class Inventory {
 				else if(temp.level == 4) {percent = 10; System.out.println("비용은 [30000 골드]입니다."); money = 30000;}
 							
 				System.out.printf("강화 성공확률 [ %d ]퍼센트\n",percent);
+				System.out.println("XXX [주 의] 강화 실패시 무기가 사라집니다!!! XXX");
 				System.out.println(" 강화 하시겠습니까? ");
 				System.out.println("[1. YES] [2. NO]");
 				int select = Game.in.nextInt();
@@ -264,7 +265,7 @@ public class Inventory {
 			System.out.println(" [비어있음] ");
 	}
 	
-	//아이템 벗기
+	//아이템 탈의
 	public void takeOffItem() {
 		
 		System.out.println("\t=== [Guild ItemSet] ===");
@@ -279,6 +280,33 @@ public class Inventory {
 		
 		if(sel >= 0 && sel < Guild.guildList.size()) {
 			
+			Guild.guildList.get(sel).itemState();
+			System.out.println();
+			System.out.println("탈의할 아이템 번호: ");
+			System.out.println("[1.무기] [2.방어구] [3.악세사리]");
+			int selItem = Game.in.nextInt();
+			
+			if(selItem > 0 && selItem < 4) {
+				if(Guild.guildList.get(sel).weapon != null && selItem == 1) {
+					inven.add(Guild.guildList.get(sel).weapon);
+					Guild.guildList.get(sel).weapon = null;
+					System.out.println("[아이템 벗기 완료]");
+				}
+				else if(Guild.guildList.get(sel).armor != null && selItem == 2) {
+					inven.add(Guild.guildList.get(sel).armor);
+					Guild.guildList.get(sel).armor = null;
+					System.out.println("[아이템 벗기 완료]");
+				} 
+				else if (Guild.guildList.get(sel).ring != null && selItem == 3){
+					inven.add(Guild.guildList.get(sel).ring);
+					Guild.guildList.get(sel).ring = null;
+					System.out.println("[아이템 벗기 완료]");
+				}
+				else
+					System.out.println("착용한 아이템이 존재하지 않습니다.");
+			}
+			else
+				System.out.println("번호를 다시 선택하시오.");
 		}
 		else
 			System.out.println("번호를 확인하시오.");

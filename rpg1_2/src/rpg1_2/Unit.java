@@ -4,27 +4,38 @@ public class Unit {
 	String name;		//이름
 	int lv;				//레벨
 	int hp;				//체력
-	int maxhp;			//최대체력
+	int maxHp;			//최대체력
 	int atk;			//공격력
 	int def;			//방어력
+	int maxExp;			//필요경험치     50 100 200 300 400 500
+	int exp;			//경험치
 	boolean party;		//파티여부
 	Item weapon;
 	Item armor;
 	Item ring;
 	
-	public Unit(String name, int lv, int hp, int maxhp, int atk, int def, boolean party) {
+	public Unit(String name, int lv, int hp, int maxHp, int atk, int def, boolean party) {
 		this.name = name;
 		this.lv = lv;
 		this.hp = hp;
-		this.maxhp = maxhp;
+		this.maxHp = maxHp;
 		this.atk = atk;
 		this.def = def;
+		this.maxExp = 50;
 		this.party = party;
 		this.weapon = null;
 		this.armor = null;
 		this.ring = null;
 	}
 	
+	//레벨 업 구간
+	public void lvUp() {
+		
+		//레벨
+		//경험치
+		//스텟 조정 (변수활용)
+	}
+
 	public void setItem(Item weapon, Item armor, Item ring) {
 		this.weapon = weapon;
 		this.armor = armor;
@@ -40,9 +51,9 @@ public class Unit {
 		else
 			System.out.printf("[hp: %d",hp + ring.power);
 		
-		if(ring == null)System.out.printf(" / %d] ",maxhp);
+		if(ring == null)System.out.printf(" / %d] ",maxHp);
 		else
-			System.out.printf("/ %d]",maxhp + ring.power);
+			System.out.printf("/ %d]",maxHp + ring.power);
 		
 		if(weapon == null) 	System.out.printf("[ATk: %d] ",atk);
 		else
