@@ -3,8 +3,17 @@ package zombi1_2;
 //보스인지 아닌지 구분해서 공격 
 
 public class Hero extends Unit {
+	
 	int power;	//파워  
 	int item;	//포션
+//싱글톤 패턴
+//		private static Myclass instance = new Myclass();
+//		private Myclass() {}
+//		public static Myclass getInstance() {
+//			return instance;
+//		}
+	
+	
 	
 	public Hero(int pos, int hp, int max, int item) {
 		super(pos, hp, max);
@@ -13,7 +22,7 @@ public class Hero extends Unit {
 
 	public void attack(Unit enemy) {
 		
-		//적이 보스일경우
+		//적이 보스일 경우
 		if(enemy instanceof Boss) {
 			Boss boss = (Boss) enemy;
 			power = r.nextInt(max) + 2;
