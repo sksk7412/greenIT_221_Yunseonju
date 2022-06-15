@@ -1,5 +1,6 @@
 package rpg1_2;
 
+
 public class Unit {
 	String name;		//이름
 	int lv;				//레벨
@@ -10,6 +11,8 @@ public class Unit {
 	int maxExp;			//필요경험치     50 100 200 300 400 500
 	int exp;			//경험치
 	boolean party;		//파티여부
+	boolean alive;
+	int power;
 	Item weapon;
 	Item armor;
 	Item ring;
@@ -23,6 +26,7 @@ public class Unit {
 		this.def = def;
 		this.maxExp = 50;
 		this.party = party;
+		this.alive = true;
 		this.weapon = null;
 		this.armor = null;
 		this.ring = null;
@@ -47,22 +51,34 @@ public class Unit {
 		
 		System.out.printf("[Name: %s] ",name);
 		System.out.printf("[Level: %d] ",lv);
-		if(ring == null)System.out.printf("[hp:%d",hp);
-		else
-			System.out.printf("[hp: %d",hp + ring.power);
+		if(alive == true) {
+			if(ring == null)System.out.printf("[hp:%d",hp);
+			else
+				System.out.printf("[hp: %d",hp + ring.power);
+			
+			if(ring == null)System.out.printf(" / %d] ",maxHp);
+			else
+				System.out.printf("/ %d]",maxHp + ring.power);
+			
+			if(weapon == null) 	System.out.printf("[ATk: %d] ",atk);
+			else
+				System.out.printf("[ATk: %d] ",atk + weapon.power);
 		
-		if(ring == null)System.out.printf(" / %d] ",maxHp);
-		else
-			System.out.printf("/ %d]",maxHp + ring.power);
-		
-		if(weapon == null) 	System.out.printf("[ATk: %d] ",atk);
-		else
-			System.out.printf("[ATk: %d] ",atk + weapon.power);
-	
-		if(armor == null) 	System.out.printf("[DEF: %d] ",def);
-		else
-			System.out.printf("[DEF: %d] ",def + armor.power);
-		System.out.printf("[Party: %s]\n",party);
+			if(armor == null) 	System.out.printf("[DEF: %d] ",def);
+			else
+				System.out.printf("[DEF: %d] ",def + armor.power);
+			System.out.printf("[Party: %s]\n",party);
+		}
+		else {
+			if(ring == null)System.out.printf("[hp:%d",hp);
+			else
+				System.out.printf("[hp: %d",hp + ring.power);
+			
+			if(ring == null)System.out.printf(" / %d] ",maxHp);
+			else
+				System.out.printf("/ %d]",maxHp + ring.power);
+			System.out.print(" [사망] \n");
+		}
 	}
 	
 	//아이템 현황

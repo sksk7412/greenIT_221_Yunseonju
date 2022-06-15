@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Guild {
 	
 	static ArrayList<Unit> guildList = new ArrayList<>();
-	Unit[] partyList = new Unit[4];
+	static Unit[] partyList = new Unit[4];
 	
 	public void set() {
 		Unit temp = new Unit("김지연", 1, 50, 50, 18, 20, true);
@@ -39,9 +39,8 @@ public class Guild {
 	// TODO
 	// 치료소
 	// 부활소
-	// 아이템 수리부분
-	
-	
+	// 아이템 수리 부분 (아이템 내구도)
+
 	//메인메뉴
 	public void mainMenu() {
 		
