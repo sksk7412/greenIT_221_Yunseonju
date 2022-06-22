@@ -22,7 +22,7 @@ public class Shop{
 		itemList.add(new Item(2, "앱솔 판금갑옷", 79, 88000));
 		
 		itemList.add(new Item(3, "낡은 목걸이", 15, 7000));
-		itemList.add(new Item(3, "베어스 그린 펜던트", 60, 32000));
+		itemList.add(new Item(3, "보석 반지", 50, 1200));
 		itemList.add(new Item(3, "하프 이어링", 80, 66000));
 		itemList.add(new Item(3, "아쿠아리움 반지", 100, 99000));
 	}
@@ -31,7 +31,7 @@ public class Shop{
 		
 		while(true) {
 			System.out.println();
-			System.out.printf("=== [상 점] === [ Money: %d ]\n",Player.money);
+			System.out.printf("\t=== [상 점] === [ Money: %d ]\n",Player.money);
 			System.out.println("[1.무기 상점][2.방어구 상정][3.악세사리 상점] [0.뒤로가기]");
 			System.out.println("선택: ");
 			int sel = Lobby.in.nextInt();
@@ -50,6 +50,7 @@ public class Shop{
 		System.out.println("==============================");
 		for(int i = 0; i < itemList.size(); i++) {
 			if(itemList.get(i).getKind() == sel) {
+				System.out.printf("[%d] ",i+1);
 				itemList.get(i).printItem();
 			}
 		}
