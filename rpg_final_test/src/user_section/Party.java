@@ -4,23 +4,18 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import main_section.Unit;
 
-
 public class Party{
+
 	static Scanner in = new Scanner(System.in);
 	
-	ArrayList<Unit> party = new ArrayList<>();
+	static ArrayList<Player> party = new ArrayList<>();
 	
-	public void set() {
-		Unit unit = new Unit("김지연",1,500,65,true);
-		party.add(unit);
-		unit = new Unit("킬리언 머피",1,450,80,true);
-		party.add(unit);
-		unit = new Unit("고죠 사토루",1,800,75,true);
-		party.add(unit);
-		unit = new Unit("옷코츠 유타",1,1000,55,true);
-		party.add(unit);
+	public Party() {
+		party.add(new Player("킬리언 머피","전사",1, 1000, 35, 99));
+		party.add(new Player("고죠 사토루","전사", 1, 1200, 40, 80));
+		party.add(new Player("옷코츠 유타","마법사", 1, 500, 80, 25));
+		party.add(new Player("김지연","힐러", 1, 650, 20, 35));
 	}
-
 
 	public void menu() {
 		while(true) {
@@ -38,13 +33,15 @@ public class Party{
 	}
 
 	private void printParty() {
-		for(int i = 0; i < ) {
-			
+		for(int i = 0; i < party.size(); i++) {
+			party.get(i).printState();
 		}
 	}
 	
 	private void printItem() {
-		// TODO Auto-generated method stub
+		for(int i = 0; i < party.size(); i++) {
+			party.get(i).itemState();
+		}
 		
 	}
 
@@ -53,9 +50,4 @@ public class Party{
 		
 	}
 
-
-
-
-	
-	
 }

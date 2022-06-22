@@ -5,11 +5,11 @@ public class Item {
 	static final int Armor = 2;
 	static final int Ring = 3;
 	
-	int kind;       // 아이템 종류
-	String name;	// 아이템 이름
-	int power;		// 아이템 파워
-	int price;		// 아이템 가격
-	int level;		// 아이템 레벨
+	private int kind;       // 아이템 종류
+	private String name;	// 아이템 이름
+	private int power;		// 아이템 파워
+	private int price;		// 아이템 가격
+	private int level;		// 아이템 레벨
 	
 	public Item(int kind, String name, int power, int price) {
 		this.kind = kind;
@@ -17,6 +17,40 @@ public class Item {
 		this.power = power;
 		this.price = price;
 		this.level = 1;
-
 	}
+	
+	public void printItem() {
+
+		if(level == 1)System.out.printf("[아이템 이름: %s] ",name);
+		else
+			System.out.printf("[아이템 이름: %s + %d] ",name,level);
+		System.out.printf("[파워: %d] ",power);
+		System.out.printf("[가격: %d G]\n",price);
+	}
+	
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public int getKind() {
+		return kind;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public int getPower() {
+		return power;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	
 }

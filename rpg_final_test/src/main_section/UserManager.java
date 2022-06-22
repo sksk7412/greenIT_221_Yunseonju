@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class UserManager {
 	
 	ArrayList<User> um = new ArrayList<>();
-
+	
 	public void menu() {
 		while(true) {
 			

@@ -1,22 +1,26 @@
 package user_section;
 
-public class Player {
+import main_section.Unit;
+
+public class Player extends Unit{
 	
 	public static int money;
-	static Party party = new Party();
+	static Party parties = new Party();
 	static Inventory inven = new Inventory();
 	
-	public Player() {
-		money = 300000;
-		party.set();
+	
+	
+	public Player(String name,String job ,int lv, int hp, int power, int def) {
+		super(name,job ,lv, hp, power, def);
+		// TODO Auto-generated constructor stub
 	}
 	
-	public void partyList() {
-		party.menu();
+	
+	public static void partyList() {
+		parties.menu();
 		
 	}
-
-	public void invenMenu() {
+	public static void invenMenu() {
 		// TODO Auto-generated method stub
 		inven.menu();
 	}
