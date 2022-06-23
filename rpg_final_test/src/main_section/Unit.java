@@ -40,6 +40,9 @@ public class Unit {
 	public void setHp(int hp){
 		this.hp = hp;
 	}
+	public int getMaXhp() {
+		return this.maxhp;
+	}
 	public void setMaxhp(int maxhp) {
 		this.maxhp = maxhp;
 	}
@@ -65,7 +68,10 @@ public class Unit {
 		this.def = def;
 		
 	}
-
+	
+	public int getDef() {
+		return this.def;
+	}
 	public Item getWeapon() {
 		return weapon;
 	}
@@ -121,11 +127,12 @@ public class Unit {
 			else System.out.printf("[체력: %d / ",this.hp + this.ring.getPower());
 			if(ring == null) System.out.printf("%d] ",this.maxhp);
 			else System.out.printf("%d] ",this.maxhp + this.ring.getPower());
+			
 			//공격력
-			if(ring == null) System.out.printf("[공격력: %d ]",this.power);
+			if(weapon == null) System.out.printf("[공격력: %d ]",this.power);
 			else System.out.printf("[공격력: %d ]",this.power+ this.weapon.getPower());
 			//방어력
-			if(ring == null) System.out.printf("[방어력: %d ]\n",this.def);
+			if(armor == null) System.out.printf("[방어력: %d ]\n",this.def);
 			else System.out.printf("[방어력: %d ]\n",this.def + this.armor.getPower());
 		}
 		else {
@@ -136,7 +143,33 @@ public class Unit {
 			if(ring == null)System.out.printf(" / %d] ",maxhp);
 			else
 				System.out.printf("/ %d]",maxhp + ring.getPower());
+			
 			System.out.print(" [사망] \n");
+		}
+		System.out.println("");
+	}
+	
+	//몬스터 상태현황
+	public void monsterPrintState() {
+		
+		System.out.printf("[이름: %s] ",this.name);
+		System.out.printf("[레벨: %d] ",this.lv);
+	
+		if(alive == true) {
+			//체력
+			if(ring == null) System.out.printf("[체력: %d / ",this.hp);
+			else System.out.printf("[체력: %d / ",this.hp + this.ring.getPower());
+			if(ring == null) System.out.printf("%d] ",this.maxhp);
+			else System.out.printf("%d] ",this.maxhp + this.ring.getPower());
+			//공격력
+			if(weapon == null) System.out.printf("[공격력: %d ]",this.power);
+			else System.out.printf("[공격력: %d ]",this.power+ this.weapon.getPower());
+			//방어력
+			if(armor == null) System.out.printf("[방어력: %d ]\n",this.def);
+			else System.out.printf("[방어력: %d ]\n",this.def + this.armor.getPower());
+		}
+		else {	
+			System.out.printf("[%d / %d] ",hp,maxhp);	
 		}
 		System.out.println("");
 	}

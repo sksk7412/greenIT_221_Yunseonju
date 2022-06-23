@@ -8,8 +8,8 @@ import user_section.Player;
 public class Dungeon {
 	
 	
-	int sel = -1;
-	
+	private int sel = -1;
+	private int move;
 	public void menu() {
 	//	MonsterManager.getInstance().setMonster();
 //			들어오면 생성
@@ -31,7 +31,7 @@ public class Dungeon {
 	public void makeDungeon(int sel) {
 		MonsterManager.getInstance().setMonster(sel-1);
 		
-		int move = 0;
+		move = 0;
 		int map[] = new int [20];
 
 		while(true) {
@@ -50,7 +50,7 @@ public class Dungeon {
 			System.out.print(" ]\n");
 			
 			//종료 조건 1. 끝까지 도착했을때
-			if(move >= 14) {
+			if(move >= 19) {
 				System.out.println("던전 클리어!!");
 				System.out.println("&&& [보 상] &&&");
 				if(sel == 1) { 
@@ -67,6 +67,7 @@ public class Dungeon {
 				}
 				 break;
 			}
+			
 			// 중간에 전멸할 경우
 			int checkNum = 0;
 			for(int i = 0; i < Party.partyList.size(); i++){
@@ -80,7 +81,7 @@ public class Dungeon {
 				break;
 			}
 				
-				if(move == 3) {
+				if(move == 5) {
 					Unit temp = MonsterManager.getInstance().getMonList().get(0);
 					System.out.printf("[%s] 가 등장했습니다.!! \n",temp.name);
 					while(true) {
@@ -88,8 +89,8 @@ public class Dungeon {
 						System.out.println();
 						
 						
-						playerAtk(temp);					
 						monsterAtk(Party.partyList.get(number) , temp);
+						playerAtk(temp);					
 						
 						if( temp.getHp() == 0) {
 							System.out.println("사냥 성공!!!");
@@ -97,7 +98,7 @@ public class Dungeon {
 						}
 					}
 				}
-				else if(move == 7) {
+				else if(move == 10) {
 					Unit temp = MonsterManager.getInstance().getMonList().get(1);
 					System.out.printf("[%s] 가 등장했습니다. \n", temp.name);
 					while(true) {
@@ -105,8 +106,8 @@ public class Dungeon {
 						int number = Lobby.ran.nextInt(Party.partyList.size());
 						System.out.println();
 					
+						monsterAtk(Party.partyList.get(number) , temp);
 						playerAtk(temp);			
-						monsterAtk(Party.partyList.get(number) , temp);;
 						
 						if(temp.getHp() == 0) {
 							System.out.println("사냥 성공!!!");
@@ -114,32 +115,15 @@ public class Dungeon {
 						}
 					}
 				}
-				else if (move == 13) {
+				else if (move == 15) {
 					Unit temp = MonsterManager.getInstance().getMonList().get(2);
 					System.out.printf("[%s] 가 등장했습니다. \n",temp.name);
 					while(true) {
 						int number = Lobby.ran.nextInt(Party.partyList.size());
 						System.out.println();					
 						
-						playerAtk(temp);					
 						monsterAtk(Party.partyList.get(number) , temp);
-						
-						if( temp.getHp() == 0) {
-							System.out.println("사냥 성공!!!");
-							break;
-						}
-					}
-				}
-				else if (move == 17) {
-					Unit temp = MonsterManager.getInstance().getMonList().get(3);
-					System.out.printf("[%s] 가 등장했습니다. \n",temp.name);
-					while(true) {
-						
-						int number = Lobby.ran.nextInt(Party.partyList.size());
-						System.out.println();					
-						
 						playerAtk(temp);					
-						monsterAtk(Party.partyList.get(number) , temp);
 						
 						if( temp.getHp() == 0) {
 							System.out.println("사냥 성공!!!");
@@ -148,15 +132,16 @@ public class Dungeon {
 					}
 				}
 			
-			//보스 몬스터
-			int index = Lobby.ran.nextInt(5);
-			if( index == 1 && move == 19 ) {
-				// 선주님바보
-				
-				System.out.println("XXX [보스 몬스터 등장] XXX");
-				System.out.printf("[보스] %s 이(가) 나타났습니다.\n",monsterList.get(3).name);
-				
-			}
+//			//보스 몬스터
+//			int index = Lobby.ran.nextInt(5);
+//			if( index == 1 && move == 19 ) {
+//				// 선주님바보
+//				Unit temp = MonsterManager.getInstance().getMonList().get(4);
+//				System.out.println("XXX [보스 몬스터 등장] XXX");
+//				System.out.printf("[보스] %s 이(가) 나타났습니다.\n",temp.name);
+//				
+//			}
+			
 			move ++;
 			
 			try {
@@ -171,24 +156,41 @@ public class Dungeon {
 		public void playerAtk(Unit monster) {
 					
 			for(int i = 0; i < Party.partyList.size(); i++) {
-				if(Guild.partyList[i].hp > 0) {
-					int atk = Lobby.ran.nextInt(Guild.partyList[i].atk) + 1;
-					System.out.println("==========================================");
-					System.out.printf("%s 이(가) %d 의 공격력으로 때립니다.\n",Guild.partyList[i].name, atk);
-					System.out.println("==========================================");
-					monster.hp -= atk;
+				Unit temp = Party.partyList.get(i);
+				int num = temp.getWeapon().getPower();
+				if(temp.getHp() > 0) {
 					
-					if(monster.hp <= 0)monster.hp = 0;
-					monster.printState();
+					//무기 스텟 ++
+					int atk = 0;
+					if(num == 0) {
+						 atk = Lobby.ran.nextInt(temp.getPower()) + 1;
+					}
+					else
+						 atk = Lobby.ran.nextInt(temp.getPower() + num) + 1;
+					
+					System.out.println("==========================================");
+					System.out.printf("%s 이(가) %d 의 공격력으로 때립니다.\n",temp.name, atk);
+					System.out.println("==========================================");
+					monster.setHp((monster.getHp() + monster.getDef()) - atk);
+					
+					if(monster.getHp() <= 0) monster.setHp(0);
+					
+					monster.monsterPrintState();
 					System.out.println();
 				}
 				else {
 					System.out.println("==========================================");
-					System.out.printf("%s 이(가) 사망했습니다.\n",Guild.partyList[i].name);
+					System.out.printf("%s 이(가) 사망했습니다.\n",temp.name);
 					System.out.println("==========================================");
-					Guild.partyList[i].alive = false;
+					temp.setAlive(false);
 				}
 			
+			}
+			
+			try {
+				Thread.sleep(1000);
+			} catch (Exception e) {
+				// TODO: handle exception
 			}
 		}
 		
@@ -196,55 +198,61 @@ public class Dungeon {
 		public void monsterAtk(Unit hero , Unit monster) {
 			
 			// 일반 몬스터일 경우
-			if(monster.check != 1) {
-				int atk = Lobby.ran.nextInt(monster.atk);
-				if(monster.hp > 0) {
+			if(move != 19) {
+				int atk = Lobby.ran.nextInt(monster.getPower());
+				if(monster.getHp() > 0) {
 					System.out.println("==========================================");
 					System.out.printf("%s 이(가) %d 의 공격력으로 때립니다.\n",monster.name, atk);
 					System.out.printf("%s 이(가) 공격을 맞았습니다.\n",hero.name);
 					System.out.println("==========================================");
-					hero.hp -= atk;
+					hero.setHp((hero.getHp() + hero.getDef() )- atk);
 					
-					if(hero.hp <= 0)hero.hp = 0;
+					if(hero.getHp() <= 0) hero.setHp(0);
 					System.out.println();
 				}
 			}
-			// 보스 몬스터일 경우
-			else {
-				
-				int atkNum = Lobby.ran.nextInt(5);
-				if(monster.hp > 0) {
-					if(atkNum == 4) {
-						if(sel == 1) {
-							int atk =  3 * Lobby.ran.nextInt(monster.atk) + 2;
-							System.out.println("==========================================");
-							System.out.println("%s 이(가) [ 내려찍기 ] 스킬을 사용합니다.");
-							System.out.printf("%s 이(가) %d 의 공격력으로 때립니다.\n",monster.name, atk);
-							System.out.printf("%s 이(가) 공격을 맞았습니다.\n",hero.name);
-							System.out.println("==========================================");
-							hero.hp -= atk;
-							
-							if(hero.hp <= 0)hero.hp = 0;
-						}
-						else if(sel == 2) {}
-						else if(sel == 3) {}
-						
-					}
-					else {
-						int atk = Lobby.ran.nextInt(monster.atk) + 2;
-						System.out.println("==========================================");
-						System.out.printf("%s 이(가) %d 의 공격력으로 때립니다.\n",monster.name, atk);
-						System.out.printf("%s 이(가) 공격을 맞았습니다.\n",hero.name);
-						System.out.println("==========================================");
-						hero.hp -= atk;
-						
-						if(hero.hp <= 0)hero.hp = 0;
-					}
-				}
-				System.out.println();
-			}
+//			// 보스 몬스터일 경우
+//			else {
+//				
+//				int atkNum = Lobby.ran.nextInt(5);
+//				if(monster.hp > 0) {
+//					if(atkNum == 4) {
+//						if(sel == 1) {
+//							int atk =  3 * Lobby.ran.nextInt(monster.atk) + 2;
+//							System.out.println("==========================================");
+//							System.out.println("%s 이(가) [ 내려찍기 ] 스킬을 사용합니다.");
+//							System.out.printf("%s 이(가) %d 의 공격력으로 때립니다.\n",monster.name, atk);
+//							System.out.printf("%s 이(가) 공격을 맞았습니다.\n",hero.name);
+//							System.out.println("==========================================");
+//							hero.hp -= atk;
+//							
+//							if(hero.hp <= 0)hero.hp = 0;
+//						}
+//						else if(sel == 2) {}
+//						else if(sel == 3) {}
+//						
+//					}
+//					else {
+//						int atk = Lobby.ran.nextInt(monster.atk) + 2;
+//						System.out.println("=========================================="); s
+//						System.out.printf("%s 이(가) %d 의 공격력으로 때립니다.\n",monster.name, atk);
+//						System.out.printf("%s 이(가) 공격을 맞았습니다.\n",hero.name);
+//						System.out.println("==========================================");
+//						hero.hp -= atk;
+//						
+//						if(hero.hp <= 0)hero.hp = 0;
+//					}
+//				}
+//				System.out.println();
+//			}
 			//플레이어 상태 출력
-			System.out.printf("[Name: %s ] [%d / %d]\n",hero.name,hero.hp,hero.maxHp);
+			System.out.printf("[Name: %s ] [%d / %d]\n",hero.name,hero.getHp(),hero.getMaXhp());
+			
+			try {
+				Thread.sleep(1000);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 		}
 	
 }

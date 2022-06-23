@@ -14,10 +14,10 @@ public class MonsterManager {
 	private static ArrayList<Unit> monsterList;
 	
 	public void setMonster(int sel) {
-		int size = 4;
+		int size = 5;
 		monsterList = new ArrayList<>(); 
 		
-		for(int i = 0; i < size; i++) {
+		for(int i = 0; i < size-1; i++) {
 			int ranInt = Lobby.ran.nextInt(monsterName[sel].length);
 			
 			try {	
