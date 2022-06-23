@@ -49,7 +49,7 @@ public class Shop{
 		System.out.println("==============================");
 		for(int i = 0; i < itemList.size(); i++) {
 			if(itemList.get(i).getKind() == sel) {
-				System.out.printf("[%d] ",i+1);
+				System.out.printf("[%d] ",++count);
 				itemList.get(i).printItem();
 			}
 		}

@@ -7,8 +7,8 @@ public class User {
 	private int userCode;
 	private String id;
 	private String pw;
-	private ArrayList<Unit> partyList;
-	private ArrayList<Item> invenList;
+	private ArrayList<Unit> partyList = new ArrayList<>();
+	private ArrayList<Item> invenList = new ArrayList<>();
 	
 	public User(String id, String pw, int code) {
 		this.id = id;

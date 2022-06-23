@@ -2,7 +2,7 @@ package main_section;
 
 public class Unit {
 	
-	private String name;
+	public String name;
 	private String job;
 	private int lv;
 	private int hp;
@@ -28,6 +28,11 @@ public class Unit {
 		this.ring = null;
 	}
 	
+	//
+	public void init(int hp2, int pow) {
+		// TODO Auto-generated method stub
+		
+	}
 	public Item getWeapon() {
 		return weapon;
 	}
@@ -58,6 +63,16 @@ public class Unit {
 	}
 	public void setAlive(boolean alive) {
 		this.alive = alive;
+	}
+	
+	//공격
+	void attack(Unit target) {
+		target.hp -= power;
+		System.out.println("[" + name + "] 이 " + "[" + target.name + "] 에게 " + power + "의 데미지를 입힙니다. ");
+		if (target.hp <= 0) {
+			System.out.println("[" + target.name + "] 을 쳐치했습니다.");
+			target.hp = 0;
+		}
 	}
 	
 	//상태 출력

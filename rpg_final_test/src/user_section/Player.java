@@ -8,13 +8,10 @@ public class Player extends Unit{
 	static Party parties = new Party();
 	static Inventory inven = new Inventory();
 	
-	
-	
 	public Player(String name,String job ,int lv, int hp, int power, int def) {
 		super(name,job ,lv, hp, power, def);
 		// TODO Auto-generated constructor stub
 	}
-	
 	
 	public static void partyList() {
 		parties.menu();
