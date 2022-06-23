@@ -28,20 +28,36 @@ public class Unit {
 		this.ring = null;
 	}
 	
+	public Item getWeapon() {
+		return weapon;
+	}
+
+	public void setWeapon(Item weapon) {
+		this.weapon = weapon;
+	}
+
+	public Item getArmor() {
+		return armor;
+	}
+
+	public void setArmor(Item armor) {
+		this.armor = armor;
+	}
+
+	public Item getRing() {
+		return ring;
+	}
+
+	public void setRing(Item ring) {
+		this.ring = ring;
+	}
+	
 	//생사여부
 	public boolean getAlive() {
 		return alive;
 	}
 	public void setAlive(boolean alive) {
 		this.alive = alive;
-	}
-	
-	//아이템 세팅
-	public void setItem(Item weapon, Item armor,Item ring) {
-		this.weapon = weapon;
-		this.armor = armor;
-		this.ring = ring;
-		
 	}
 	
 	//상태 출력

@@ -1,6 +1,7 @@
 package main_section;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,8 +12,6 @@ public class UserManager {
 	private static Map<Integer, User> userMap;
 	private static int userCodeNum;
 	private int log;
-
-	ArrayList<User> um = new ArrayList<>();
 
 	private UserManager() {
 		userMap = new HashMap<>();
@@ -53,18 +52,13 @@ public class UserManager {
 
 		for (Integer i : userMap.keySet()) {
 			if (LogId.equals(userMap.get(i).getId()) && LogPw.equals(userMap.get(i).getPw())) {
+				
 				log = i;
+				System.out.println("log: "+log);
 				check = true;
 				break;
 			}
 		}
-//		
-//		for(int i = 0; i < um.size(); i++) {
-//			if(um.get(i).getId().equals(LogId) && um.get(i).getPw().equals(LogPw)) {
-//				
-//				check = true;
-//			}
-//		}
 
 		if (check) {
 			System.out.println("[ 로그인 ]");
@@ -86,40 +80,32 @@ public class UserManager {
 				check = false;
 		}
 
-//		for(int i = 0; i < um.size(); i++) {
-//			if(um.get(i).getId().equals(creId)) {
-//				check = false;
-//			}
-//		}
 
 		if (check) {
 			User user = new User(creId, crePw, userCodeNum);
 
 			// 핵심
 			userMap.put(userCodeNum++, user);
-
-			um.add(user);
 			System.out.println("회원 가입 완료.");
 		} else
 			System.err.println("중복된 아이디 입니다.");
 	}
 
 	private void deleteId() {
-		int check = -1;
+		boolean check = false;
 
 		System.out.println("탈퇴할 아이디: ");
 		String deleId = Lobby.in.next();
 		System.out.println("탈퇴할 비밀번호: ");
 		String delePw = Lobby.in.next();
 
-		for (int i = 0; i < um.size(); i++) {
-			if (um.get(i).getId().equals(deleId) && um.get(i).getPw().equals(delePw)) {
-				check = i;
-			}
+		for (Integer i : userMap.keySet()) {
+			if (userMap.get(i).getId().equals(deleId)  && userMap.get(i).getPw().equals(delePw))
+				check = true;
 		}
 
-		if (check != -1) {
-			um.remove(check);
+		if (check) {
+			userMap.remove(log);
 			System.out.println("회원 탈퇴 완료.");
 		} else
 			System.err.println("아이디 혹은 비밀번호가 옳지 않습니다.");

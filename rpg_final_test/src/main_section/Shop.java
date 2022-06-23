@@ -7,7 +7,6 @@ import user_section.Inventory;
 public class Shop{
 //	Inventory inventory = new Inventory();
 	ArrayList<Item> itemList = new ArrayList<>();
-	
 
 	public void shopSet() {
 		
@@ -75,6 +74,7 @@ public class Shop{
 				Item temp = new Item(itemList.get(index).getKind(), itemList.get(index).getName(), itemList.get(index).getPower(), itemList.get(index).getPrice());
 				Inventory.invenList.add(temp);		
 				Player.money -= temp.getPrice();
+				UserManager.getInstance().getUser().setAddItem(temp);
 				System.out.printf("[ %s ] 구매완료.\n",temp.getName());
 			}
 			else

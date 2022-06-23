@@ -8,6 +8,7 @@ public class User {
 	private String id;
 	private String pw;
 	private ArrayList<Unit> partyList;
+	private ArrayList<Item> invenList;
 	
 	public User(String id, String pw, int code) {
 		this.id = id;
@@ -30,5 +31,19 @@ public class User {
 	
 	public ArrayList<Unit> getParty(){
 		return partyList;
+	}
+	public ArrayList<Item> getItem(){
+		return invenList;
+	}
+	
+	public void setParty(Unit unit) {
+		partyList.add(unit);
+	}
+	
+	public void setAddItem(Item item) {
+		invenList.add(item);
+	}
+	public void setDeleItem(Item item) {
+		invenList.remove(item);
 	}
 }

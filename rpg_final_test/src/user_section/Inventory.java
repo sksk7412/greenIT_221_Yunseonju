@@ -2,6 +2,8 @@ package user_section;
 
 import java.util.ArrayList;
 import main_section.Item;
+import main_section.UserManager;
+
 public class Inventory {
 
 	public static ArrayList<Item> invenList = new ArrayList<>();
@@ -32,10 +34,123 @@ public class Inventory {
 		}
 	}
 	
-	private void wearItem() {
-		// TODO Auto-generated method stub
-		
-	}
+	//아이템 착용
+		public void wearItem() {
+			if(invenList.size() > 0) {
+				//전체 길드 멤버의 아이템 현황
+				for(int i = 0; i < Party.partyList.size(); i++) {
+					System.out.printf("[%d]",i+1);
+					Party.partyList.get(i).itemState();
+					System.out.println();
+				}
+				
+				System.out.println("아이템 착용할 길드원 번호: ");
+				int sel = Party.in.nextInt()-1;
+				
+				if(sel >= 0 && sel < Party.partyList.size()) {
+					
+					//해당 멤버의 아이템 착용 상태 및 인벤토리 출력
+					Party.partyList.get(sel).itemState();
+					System.out.print("\n\n");
+					printInvenList();
+									
+					System.out.println("착용할 아이템 번호: ");
+					int itemIndex = Party.in.nextInt()-1;
+					
+					if(itemIndex >= 0 && itemIndex < invenList.size()) {
+						
+						// 아이템 타입에 따라서 처리
+						if(invenList.get(itemIndex).getKind() == 1) {
+							
+							//무기 착용 및 교체
+							if(Party.partyList.get(sel).getWeapon() == null) {
+								Party.partyList.get(sel).setWeapon(invenList.get(itemIndex));
+								invenList.remove(itemIndex);
+								System.out.println("무기를 착용합니다.");
+							}
+							else {
+								System.out.printf("[ %s ] 장비에서 [ %s ] 장비로 교체 하시겠습니까? \n",Party.partyList.get(sel).getWeapon().getName(), invenList.get(itemIndex).getName());
+								System.out.println("[1.YES] [2.NO]");
+								int choose = Party.in.nextInt();
+								
+								if(choose == 1) {
+									invenList.add(Party.partyList.get(sel).getWeapon());
+									Party.partyList.get(sel).setWeapon(invenList.get(itemIndex));	
+									invenList.remove(itemIndex);
+									System.out.println("무기를 교체합니다.");
+								}
+								else if(choose == 2) {
+									System.err.println("무기를 변경하지 않습니다.");
+								}
+								else 
+									menu();
+							 }
+						 }
+						//방어구 착용 및 교체
+						else if(invenList.get(itemIndex).getKind() == 2) {
+							
+							//무기 착용 및 교체
+							if(Party.partyList.get(sel).getArmor() == null) {
+								Party.partyList.get(sel).setArmor(invenList.get(itemIndex));
+								invenList.remove(itemIndex);
+								System.out.println("방어구를 착용합니다.");
+							}
+							else {
+								System.out.printf("[ %s ] 장비에서 [ %s ] 장비로 교체 하시겠습니까? \n",Party.partyList.get(sel).getArmor().getName(), invenList.get(itemIndex).getName());
+								System.out.println("[1.YES] [2.NO]");
+								int choose = Party.in.nextInt();
+								
+								if(choose == 1) {
+									invenList.add(Party.partyList.get(sel).getArmor());
+									Party.partyList.get(sel).setArmor(invenList.get(itemIndex));	
+									invenList.remove(itemIndex);
+									System.out.println("방어구를 교체합니다.");
+								}
+								else if(choose == 2) {
+									System.err.println("방어구를 변경하지 않습니다.");
+								}
+								else 
+									menu();
+							 }
+						}
+						//악세사리 착용 및 교체
+						else if(invenList.get(itemIndex).getKind() == 3){
+							
+							//무기 착용 및 교체
+							if(Party.partyList.get(sel).getRing() == null) {
+								Party.partyList.get(sel).setRing(invenList.get(itemIndex));
+								invenList.remove(itemIndex);
+								System.out.println("악세사리를 착용합니다.");
+							}
+							else {
+								System.out.printf("[ %s ] 장비에서 [ %s ] 장비로 교체 하시겠습니까? \n",Party.partyList.get(sel).getRing().getName(), invenList.get(itemIndex).getName());
+								System.out.println("[1.YES] [2.NO]");
+								int choose = Party.in.nextInt();
+								
+								if(choose == 1) {
+									invenList.add(Party.partyList.get(sel).getRing());
+									Party.partyList.get(sel).setRing(invenList.get(itemIndex));	
+									invenList.remove(itemIndex);
+									System.out.println("악세사리를 교체합니다.");
+								}
+								else if(choose == 2) {
+									System.err.println("악세사리를 변경하지 않습니다.");
+								}
+								else 
+									menu();
+							 }
+						}
+					}
+					else
+						System.out.println("아이템 번호를 확인하시오.");
+				}
+				else
+					System.out.println("길드원 번호를 확인하시오.");
+			}
+			else
+				System.out.println(" [비어있음] ");
+		}
+	
 	private void sellItem() {
 
 		printInvenList();
@@ -44,9 +159,10 @@ public class Inventory {
 		int sellItem = Party.in.nextInt()-1;
 		
 		if(sellItem >= 0 && sellItem < invenList.size()) {
-			
+			Item item = invenList.get(sellItem);
 			Player.money += invenList.get(sellItem).getPrice() * 0.5;
 			System.out.printf("[%s] 아이템 판매 완료\n",invenList.get(sellItem).getName());
+			UserManager.getInstance().getUser().setDeleItem(item);
 			invenList.remove(sellItem);
 		}
 	}

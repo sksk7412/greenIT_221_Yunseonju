@@ -28,14 +28,17 @@ public class Item {
 		System.out.printf("[가격: %d G]\n",price);
 	}
 	
-	public int getLevel() {
-		return level;
-	}
-
+	
+	//SET
 	public void setLevel(int level) {
 		this.level = level;
 	}
-
+	
+	// GET
+	public int getLevel() {
+		return level;
+	}
+	
 	public int getKind() {
 		return kind;
 	}
