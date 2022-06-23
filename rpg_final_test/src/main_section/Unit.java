@@ -9,6 +9,8 @@ public class Unit {
 	private int maxhp;
 	private int power;
 	private int def;
+	private int exp;
+	private int maxexp;
 	private boolean alive;
 	private Item weapon;
 	private Item armor;
@@ -28,11 +30,42 @@ public class Unit {
 		this.ring = null;
 	}
 	
-	//
-	public void init(int hp2, int pow) {
-		// TODO Auto-generated method stub
+	public void setLv(int lv) {
+		this.lv = lv;
+	}
+	
+	public int getHp() {
+		return this.hp;
+	}
+	public void setHp(int hp){
+		this.hp = hp;
+	}
+	public void setMaxhp(int maxhp) {
+		this.maxhp = maxhp;
+	}
+
+	public int getPower() {
+		return power;
+	}
+
+	public void setPower(int power) {
+		this.power = power;
+	}
+
+	public void setDef(int def) {
+		this.def = def;
+	}
+
+	public Unit(String name, int lv, int hp, int power, int def) {
+		
+		this.name = name;
+		this.lv = lv;
+		this.hp = hp;
+		this.power = power;
+		this.def = def;
 		
 	}
+
 	public Item getWeapon() {
 		return weapon;
 	}

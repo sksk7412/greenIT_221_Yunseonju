@@ -55,5 +55,49 @@ public class Item {
 		return price;
 	}
 
-	
+	public void setPower(int kind,int level) {
+		
+		if(kind == 1) {
+			if(level == 2) {
+				this.power += 20;
+			}
+			if(level == 3) {
+				this.power += 35;	
+			}
+			if(level == 4) {
+				this.power += 45;
+			}
+			if(level == 5) {
+				this.power += 52;
+			}
+		}
+		if(kind == 2) {
+			if(level == 2) {
+				this.power += 22;
+			}
+			if(level == 3) {
+				this.power += 37;	
+			}
+			if(level == 4) {
+				this.power += 42;
+			}
+			if(level == 5) {
+				this.power += 58;
+			}
+		}
+		if(kind == 3) {
+			if(level == 2) {
+				this.power += 30;
+			}
+			if(level == 3) {
+				this.power += 45;	
+			}
+			if(level == 4) {
+				this.power += 50;
+			}
+			if(level == 5) {
+				this.power += 60;
+			}
+		}
+	}
 }

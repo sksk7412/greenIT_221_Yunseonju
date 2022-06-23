@@ -1,14 +1,16 @@
 package user_section;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 import main_section.UserManager;
 
 public class Party{
 
-	static Scanner in = new Scanner(System.in);
+	public static Scanner in = new Scanner(System.in);
+	public static Random ran = new Random();
 	
-	static ArrayList<Player> partyList = new ArrayList<>();
+	public static ArrayList<Player> partyList = new ArrayList<>();
 	
 	public Party() {
 		partyList.add(new Player("킬리언 머피","전사",1, 1000, 35, 99));

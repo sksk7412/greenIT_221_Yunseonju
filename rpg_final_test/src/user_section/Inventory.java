@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import main_section.Item;
 import main_section.UserManager;
 
+
 public class Inventory {
 
 	public static ArrayList<Item> invenList = new ArrayList<>();
@@ -14,18 +15,97 @@ public class Inventory {
 		
 			System.out.println(" === [인벤토리 메뉴] === ");
 			System.out.printf("[Player Money: %d]\n",Player.money);
-			System.out.println("[1.인벤토리 출력][2.아이템 착용][3.아이템 판매(세금50%)][0.뒤로가기]");
+			System.out.println("[1.인벤토리 출력][2.아이템 착용][3.아이템 판매(세금50%)][4.장비 강화][0.뒤로가기]");
 			int sel = Party.in.nextInt();
 			
 			if(sel == 1) printInvenList();
 			else if(sel == 2) wearItem();
 			else if(sel == 3) sellItem();
+			else if(sel == 4) upgradeItem();
 			else if(sel == 0) break;
 			else
 				System.err.println("다시 입력하세요.");
 		}
 	}
 	
+	//장비 강화
+	private void upgradeItem() {
+		printInvenList();
+		
+		System.out.println("강화할 장비 번호: ");
+		int sel = Party.in.nextInt()-1;
+		
+		if(sel >= 0 && sel < invenList.size()) {
+			Item temp = invenList.get(sel);
+			
+			if(temp.getLevel() <= 5) {
+				int money = 0;
+				int percent = 0;
+				int check = -1;
+				if(temp.getLevel() == 1) {percent = 80; System.out.println("비용은 [2000 골드]입니다."); money = 2000;}
+				else if(temp.getLevel() == 2) {percent = 60; System.out.println("비용은 [5000 골드]입니다."); money = 5000;}
+				else if(temp.getLevel() == 3) {percent = 30; System.out.println("비용은 [10000 골드]입니다."); money = 10000;}
+				else if(temp.getLevel() == 4) {percent = 10; System.out.println("비용은 [30000 골드]입니다."); money = 30000;}
+							
+				System.out.printf("강화 성공확률 [ %d ]퍼센트\n",percent);
+				System.out.println("XXX [주 의] 강화 실패시 무기가 사라집니다!!! XXX");
+				System.out.println(" 강화 하시겠습니까? ");
+				System.out.println("[1. YES] [2. NO]");
+				int select = Party.in.nextInt();
+				
+				if((Player.money- money) >= 0) {
+					if(select == 1) {
+						if(temp.getLevel() == 1) {
+							int num = Party.ran.nextInt(5);
+							if(num != 0) {
+								check = 1;
+							}
+						}
+						else if(temp.getLevel() == 2) {
+							int num = Party.ran.nextInt(5);
+							if(num != 0 || num != 1) {
+								check = 1;
+							}
+						}
+						else if(temp.getLevel() == 3) {
+							int num = Party.ran.nextInt(10);
+							if(num == 0 || num == 5 || num == 7) {
+								check = 1;
+							}
+						}
+						else if(temp.getLevel() == 4) {
+							int num = Party.ran.nextInt(10);
+							if(num == 0) {
+								check = 1;
+							}
+						}
+						
+						if(check == 1) {
+							invenList.get(sel).setLevel(invenList.get(sel).getLevel() + 1 );
+							invenList.get(sel).setPower(invenList.get(sel).getKind(),invenList.get(sel).getLevel());
+							System.out.println("===============================");
+							System.out.println("\t [강화 성공!!!] ");
+							System.out.println("===============================");
+						}
+						else {
+							invenList.remove(sel);
+							System.out.println("[ 강화 실패 ]");
+						}
+						
+						Player.money -= money;
+					}
+					else
+						System.out.println("강화를 하지 않습니다.");
+				}
+				else
+					System.out.println("골드가 부족합니다.");
+			}
+			else
+				System.out.println("더이상 장비 강화가 불가합니다.");
+		}
+		else
+			System.out.println("장비 번호를 다시 확인하시오.");
+	}
 	//인벤토리 아이템 출력
 	public void printInvenList() {
 		for(int i = 0; i < invenList.size(); i ++) {
