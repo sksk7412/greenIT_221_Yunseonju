@@ -11,7 +11,6 @@ public class Unit {
 	private int def;
 	private int exp;
 	private int maxexp;
-	private String skill;
 	private boolean alive;
 	private Item weapon;
 	private Item armor;
@@ -41,11 +40,7 @@ public class Unit {
 		this.def = def;
 		
 	}
-	
-	//GET
-	public String getSkill() {
-		return skill;
-	}
+
 	public int getHp() {
 		return this.hp;
 	}

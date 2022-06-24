@@ -1,8 +1,9 @@
 package user_section;
 
+import main_section.Skill;
 import main_section.Unit;
 
-public class Player extends Unit{
+public class Player extends Unit implements Skill{
 	
 	public static int money;
 	static Party parties = new Party();
@@ -18,6 +19,12 @@ public class Player extends Unit{
 	}
 	public static void invenMenu() {
 		inven.menu();
+	}
+
+	@Override
+	public void skill(Unit unit) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

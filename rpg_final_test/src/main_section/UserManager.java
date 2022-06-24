@@ -86,6 +86,7 @@ public class UserManager {
 
 			// 핵심
 			userMap.put(userCodeNum++, user);
+			
 			System.out.println("회원 가입 완료.");
 		} else
 			System.err.println("중복된 아이디 입니다.");

@@ -230,32 +230,21 @@ public class Dungeon {
 			}
 			// 보스 몬스터일 경우
 			else {	
-				int atkNum = Lobby.ran.nextInt(5);
+				int atkNum = Lobby.ran.nextInt(1);
 				if(monster.getHp() > 0) {
-					int atk;
-					if(atkNum == 4) {
-						//슬라임 보스 스킬(내려찍기)
-						atk =  3 * Lobby.ran.nextInt(monster.getPower()) + 2;
-						System.out.println("==========================================");
-						System.out.printf("%s 이(가) [ %s ] 스킬을 사용합니다.\n",monster.name,monster.getSkill());
-						System.out.printf("%s 이(가) %d 의 공격력으로 때립니다.\n",monster.name, atk);
-						System.out.printf("%s 이(가) 강력한 공격을 맞았습니다.\n",hero.name);
-						System.out.println("==========================================");
-						if(sel == 1) {
-						}
+					if(atkNum == 0) {
+						
 						//고블린 보스 스킬(강력한 독 뿌리기)
-						else if(sel == 2) {
+						if(sel == 2) {
+							System.out.printf("%s 이(가) [ 포이즌 레인 ] 스킬을 사용합니다.\n",monster.name);
+							System.out.printf("%s 이(가) 전체 파티원을 때립니다.\n",monster.name);
 							goblineSkill(monster);
 						}
-						//오크 보스 스킬(더블 엑스)
-						else if(sel == 3) {
-							atk = atk * 2;
-						}
-						
-						hero.setHp(hero.getHp()- atk);
+						else ((Skill) monster).skill(hero);
+		
 					}
 					else {
-						 atk = Lobby.ran.nextInt(monster.getPower()) + 2;
+						int atk = Lobby.ran.nextInt(monster.getPower()) + 2;
 						System.out.println("=========================================="); 
 						System.out.printf("%s 이(가) %d 의 공격력으로 때립니다.\n",monster.name, atk);
 						System.out.printf("%s 이(가) 공격을 맞았습니다.\n",hero.name);
@@ -280,20 +269,9 @@ public class Dungeon {
 		
 		//고블린 스킬
 		private void goblineSkill( Unit monster ) {
-			// TODO Auto-generated method stub
-			
-			int atk =  3 * Lobby.ran.nextInt(monster.getPower()) + 2;
-			System.out.println("==========================================");
-			System.out.printf("%s 이(가) [ %s ] 스킬을 사용합니다.\n",monster.name,monster.getSkill());
-			System.out.printf("%s 이(가) %d 의 공격력으로 전체 파티원을 때립니다.\n",monster.name, atk);
-			System.out.printf("%s 이(가) 강력한 공격을 맞았습니다.",Party.partyList.get(0).name);
-			System.out.printf("%s 이(가) 강력한 공격을 맞았습니다.",Party.partyList.get(1).name);
-			System.out.printf("%s 이(가) 강력한 공격을 맞았습니다.",Party.partyList.get(2).name);
-			System.out.printf("%s 이(가) 강력한 공격을 맞았습니다.\n",Party.partyList.get(3).name);
-			System.out.println("==========================================");
-			
+			// TODO Auto-generated method stub		
 			for(int i = 0; i < Party.partyList.size(); i++) {
-				Party.partyList.get(i).setHp( Party.partyList.get(i).getHp() - atk);
+				((Skill) monster).skill(Party.partyList.get(i));
 			}
 		}
 		

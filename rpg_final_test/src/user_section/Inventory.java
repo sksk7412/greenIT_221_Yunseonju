@@ -89,23 +89,24 @@ public class Inventory {
 						}
 						else {
 							invenList.remove(sel);
-							System.out.println("[ 강화 실패 ]");
+							System.err.println("[ 강화 실패 ]");
 						}
 						
 						Player.money -= money;
 					}
 					else
-						System.out.println("강화를 하지 않습니다.");
+						System.err.println("강화를 하지 않습니다.");
 				}
 				else
-					System.out.println("골드가 부족합니다.");
+					System.err.println("골드가 부족합니다.");
 			}
 			else
-				System.out.println("더이상 장비 강화가 불가합니다.");
+				System.err.println("더이상 장비 강화가 불가합니다.");
 		}
 		else
-			System.out.println("장비 번호를 다시 확인하시오.");
+			System.err.println("장비 번호를 다시 확인하시오.");
 	}
+	
 	//인벤토리 아이템 출력
 	public void printInvenList() {
 		for(int i = 0; i < invenList.size(); i ++) {
@@ -222,13 +223,13 @@ public class Inventory {
 						}
 					}
 					else
-						System.out.println("아이템 번호를 확인하시오.");
+						System.err.println("아이템 번호를 확인하시오.");
 				}
 				else
-					System.out.println("길드원 번호를 확인하시오.");
+					System.err.println("길드원 번호를 확인하시오.");
 			}
 			else
-				System.out.println(" [비어있음] ");
+				System.err.println(" [비어있음] ");
 		}
 	
 	//아이템 판매
