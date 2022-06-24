@@ -11,7 +11,7 @@ public class Special_ork extends Unit{
 	
 	public Special_ork() {
 		
-		super("타락한 오크",30,450,250,5);
+		super("오크 마스터",30,450,250,5);
 		
 		int ranLv = Green_slime.ran.nextInt(lv)+20;
 		int ranHp = Green_slime.ran.nextInt(hp)+900;
@@ -19,6 +19,7 @@ public class Special_ork extends Unit{
 		int randef = Green_slime.ran.nextInt(def)+55;
 		
 		setLv(ranLv);
+		setHp(ranHp);
 		setMaxhp(ranHp);
 		setPower(ranpower);
 		setDef(randef);

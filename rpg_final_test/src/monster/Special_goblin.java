@@ -11,7 +11,7 @@ public class Special_goblin extends Unit{
 	
 	public Special_goblin() {
 		
-		super("타락한 황금 고블린",15,200,25,7);
+		super("홉 고블린",15,200,25,7);
 		
 		int ranLv = Green_slime.ran.nextInt(lv)+8;
 		int ranHp = Green_slime.ran.nextInt(hp)+500;
@@ -19,6 +19,7 @@ public class Special_goblin extends Unit{
 		int randef = Green_slime.ran.nextInt(def)+30;
 		
 		setLv(ranLv);
+		setHp(ranHp);
 		setMaxhp(ranHp);
 		setPower(ranpower);
 		setDef(randef);

@@ -11,6 +11,7 @@ public class Unit {
 	private int def;
 	private int exp;
 	private int maxexp;
+	private String skill;
 	private boolean alive;
 	private Item weapon;
 	private Item armor;
@@ -30,6 +31,9 @@ public class Unit {
 		this.ring = null;
 	}
 	
+	public String getSkill() {
+		return skill;
+	}
 	public void setLv(int lv) {
 		this.lv = lv;
 	}

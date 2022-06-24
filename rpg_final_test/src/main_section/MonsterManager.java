@@ -14,11 +14,13 @@ public class MonsterManager {
 	private static ArrayList<Unit> monsterList;
 	
 	public void setMonster(int sel) {
-		int size = 5;
+		int size = 4;
 		monsterList = new ArrayList<>(); 
 		
 		for(int i = 0; i < size; i++) {
-			int ranInt = Lobby.ran.nextInt(monsterName[sel].length);
+			int ranInt = Lobby.ran.nextInt(monsterName[sel].length-1);
+			
+			if(i == size-1){ranInt = 3;}
 			
 			try {	
 				

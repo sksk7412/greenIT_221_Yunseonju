@@ -19,6 +19,7 @@ public class Red_goblin extends Unit{
 		int randef = Green_slime.ran.nextInt(def)+20;
 		
 		setLv(ranLv);
+		setHp(ranHp);
 		setMaxhp(ranHp);
 		setPower(ranpower);
 		setDef(randef);

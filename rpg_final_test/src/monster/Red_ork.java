@@ -11,7 +11,7 @@ public class Red_ork extends Unit{
 	
 	public Red_ork() {
 		
-		super("빨간 오크",30,450,250,5);
+		super("강력한 오크",30,450,250,5);
 		
 		int ranLv = Green_slime.ran.nextInt(lv)+17;
 		int ranHp = Green_slime.ran.nextInt(hp)+850;
@@ -19,6 +19,7 @@ public class Red_ork extends Unit{
 		int randef = Green_slime.ran.nextInt(def)+40;
 		
 		setLv(ranLv);
+		setHp(ranHp);
 		setMaxhp(ranHp);
 		setPower(ranpower);
 		setDef(randef);

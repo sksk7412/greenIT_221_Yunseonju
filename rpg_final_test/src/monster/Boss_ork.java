@@ -4,18 +4,20 @@ import main_section.Unit;
 
 public class Boss_ork extends Unit{
 	
-	private int lv = 5;
-	private int hp = 300;
-	private int power = 100;
+	public String skill;
+	private int lv = 30;
+	private int hp = 2000;
+	private int power = 450;
 	private int def = 10;
 	
 	public Boss_ork() {
 		
-		super("머쉬맘",5,50,15,5);
+		super("오크 족장",5,50,15,5);
 		int ranLv = Green_slime.ran.nextInt(lv)+1;
-		int ranHp = Green_slime.ran.nextInt(hp)+300;
-		int ranpower = Green_slime.ran.nextInt(power)+10;
+		int ranHp = Green_slime.ran.nextInt(hp)+500;
+		int ranpower = Green_slime.ran.nextInt(power)+100;
 		int randef = Green_slime.ran.nextInt(def)+5;
+		String skill ="액스 스매쉬";
 		
 		setLv(ranLv);
 		setHp(ranHp);
