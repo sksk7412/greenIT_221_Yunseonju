@@ -10,7 +10,6 @@ public class Player extends Unit{
 	
 	public Player(String name,String job ,int lv, int hp, int power, int def) {
 		super(name,job ,lv, hp, power, def);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public static void partyList() {
@@ -18,7 +17,6 @@ public class Player extends Unit{
 		
 	}
 	public static void invenMenu() {
-		// TODO Auto-generated method stub
 		inven.menu();
 	}
 

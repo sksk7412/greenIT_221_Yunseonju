@@ -71,19 +71,7 @@ public class Dungeon {
 				}
 				 break;
 			}
-			
-			// 중간에 전멸할 경우
-			int checkNum = 0;
-			for(int i = 0; i < Party.partyList.size(); i++){
-				if(Party.partyList.get(i).getHp() <= 0) {
-					checkNum++;
-				}
-			}
-			if(checkNum == 4) {
-				System.out.println("=== [미션 실패] ===");
-				System.out.println("파티원이 전부 사망하셨습니다.");
-				break;
-			}
+			if(checkAlive())break;
 				
 				if(move == 5) {
 					Unit temp = MonsterManager.getInstance().getMonList().get(0);
@@ -94,12 +82,13 @@ public class Dungeon {
 						
 						
 						monsterAtk(Party.partyList.get(number) , temp);
-						playerAtk(temp);					
+						 playerAtk(temp);					
 						
 						if( temp.getHp() == 0) {
 							System.out.println("사냥 성공!!!");
 							break;
 						}
+						if(checkAlive())break;
 					}
 				}
 				else if(move == 9) {
@@ -111,12 +100,13 @@ public class Dungeon {
 						System.out.println();
 					
 						monsterAtk(Party.partyList.get(number) , temp);
-						playerAtk(temp);			
+						 playerAtk(temp);				
 						
 						if(temp.getHp() == 0) {
 							System.out.println("사냥 성공!!!");
 							break;
 						}
+						if(checkAlive())break;
 					}
 				}
 				else if (move == 13) {
@@ -127,18 +117,19 @@ public class Dungeon {
 						System.out.println();					
 						
 						monsterAtk(Party.partyList.get(number) , temp);
-						playerAtk(temp);					
+						playerAtk(temp);						
 						
 						if( temp.getHp() == 0) {
 							System.out.println("사냥 성공!!!");
 							break;
 						}
+						if(checkAlive())break;
 					}
 				}
 			
 			//보스 몬스터
 			int index = Lobby.ran.nextInt(5);
-			if(  index == 0 && move == 18 ) {
+			if(index == 0 && move == 18 ) {
 				// 선주님바보
 				Unit temp = MonsterManager.getInstance().getMonList().get(3);
 				System.out.println("XXX [보스 몬스터 등장] XXX");
@@ -149,7 +140,7 @@ public class Dungeon {
 					System.out.println();					
 					
 					monsterAtk(Party.partyList.get(number) , temp);
-					playerAtk(temp);					
+					playerAtk(temp);						
 					
 					if( temp.getHp() == 0) {
 						int itemRan = Lobby.ran.nextInt(30);
@@ -164,6 +155,7 @@ public class Dungeon {
 						}
 						break;
 					}
+					if(checkAlive())break;
 				}
 				
 			}
@@ -303,6 +295,24 @@ public class Dungeon {
 			for(int i = 0; i < Party.partyList.size(); i++) {
 				Party.partyList.get(i).setHp( Party.partyList.get(i).getHp() - atk);
 			}
+		}
+		
+		public boolean checkAlive() {
+			
+			// 중간에 전멸할 경우
+			int checkNum = 0;
+			for(int i = 0; i < Party.partyList.size(); i++){
+				if(Party.partyList.get(i).getHp() <= 0) {
+					checkNum++;
+				}
+			}
+			if(checkNum == 4) {
+				System.out.println("=== [미션 실패] ===");
+				System.out.println("파티원이 전부 사망하셨습니다.");
+				return true;
+			}
+			
+			return false;
 		}
 	
 }

@@ -22,6 +22,7 @@ public class Lobby{
 	    Player.money = 300000;
 		//로드는 자동으로
 		while(true) {
+			//TODO  lobby 메뉴로 이동시 자동으로 user에 파티랑 인벤토리 저장
 			System.out.println("[ Player Gold: " + Player.money+" ]");
 			System.out.println("=== [Main menu] ===");
 			System.out.println("[1.파티메뉴] [2.상점] [3.인벤토리] [4.던전 입장]");

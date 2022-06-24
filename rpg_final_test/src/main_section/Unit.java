@@ -17,6 +17,7 @@ public class Unit {
 	private Item armor;
 	private Item ring;
 	
+	//플레이어 유닛세팅
 	public Unit(String name,String job ,int lv, int hp,int power,int def) {
 		this.name = name;
 		this.job = job;
@@ -30,39 +31,7 @@ public class Unit {
 		this.armor = null;
 		this.ring = null;
 	}
-	
-	public String getSkill() {
-		return skill;
-	}
-	public void setLv(int lv) {
-		this.lv = lv;
-	}
-	
-	public int getHp() {
-		return this.hp;
-	}
-	public void setHp(int hp){
-		this.hp = hp;
-	}
-	public int getMaXhp() {
-		return this.maxhp;
-	}
-	public void setMaxhp(int maxhp) {
-		this.maxhp = maxhp;
-	}
-
-	public int getPower() {
-		return power;
-	}
-
-	public void setPower(int power) {
-		this.power = power;
-	}
-
-	public void setDef(int def) {
-		this.def = def;
-	}
-
+	//몬스터 유닛세팅
 	public Unit(String name, int lv, int hp, int power, int def) {
 		
 		this.name = name;
@@ -73,50 +42,76 @@ public class Unit {
 		
 	}
 	
+	//GET
+	public String getSkill() {
+		return skill;
+	}
+	public int getHp() {
+		return this.hp;
+	}
+	public int getMaXhp() {
+		return this.maxhp;
+	}
+	public int getPower() {
+		return power;
+	}
 	public int getDef() {
 		return this.def;
 	}
 	public Item getWeapon() {
 		return weapon;
 	}
-
-	public void setWeapon(Item weapon) {
-		this.weapon = weapon;
-	}
-
 	public Item getArmor() {
 		return armor;
 	}
-
-	public void setArmor(Item armor) {
-		this.armor = armor;
-	}
-
 	public Item getRing() {
 		return ring;
 	}
-
-	public void setRing(Item ring) {
-		this.ring = ring;
-	}
-	
 	//생사여부
 	public boolean getAlive() {
 		return alive;
 	}
+	
+	// SET
+	public void setLv(int lv) {
+		this.lv = lv;
+	}
+	public void setHp(int hp){
+		this.hp = hp;
+	}
+	public void setMaxhp(int maxhp) {
+		this.maxhp = maxhp;
+	}
+	public void setPower(int power) {
+		this.power = power;
+	}
+	public void setDef(int def) {
+		this.def = def;
+	}
+	public void setWeapon(Item weapon) {
+		this.weapon = weapon;
+	}
+	public void setArmor(Item armor) {
+		this.armor = armor;
+	}
+	public void setRing(Item ring) {
+		this.ring = ring;
+	}
+	
 	public void setAlive(boolean alive) {
 		this.alive = alive;
 	}
 	
-	//공격
-	void attack(Unit target) {
-		target.hp -= power;
-		System.out.println("[" + name + "] 이 " + "[" + target.name + "] 에게 " + power + "의 데미지를 입힙니다. ");
-		if (target.hp <= 0) {
-			System.out.println("[" + target.name + "] 을 쳐치했습니다.");
-			target.hp = 0;
-		}
-	}
+	
+//	//공격
+//	void attack(Unit target) {
+//		target.hp -= power;
+//		System.out.println("[" + name + "] 이 " + "[" + target.name + "] 에게 " + power + "의 데미지를 입힙니다. ");
+//		if (target.hp <= 0) {
+//			System.out.println("[" + target.name + "] 을 쳐치했습니다.");
+//			target.hp = 0;
+//		}
+//	}
 	
 	//상태 출력
 	public void printState() {

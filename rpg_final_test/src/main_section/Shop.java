@@ -18,7 +18,7 @@ public class Shop{
 		itemList.add(new Item(2, "낡은 흰티", 16, 3000));
 		itemList.add(new Item(2, "핑크빈 모자", 35, 36500));
 		itemList.add(new Item(2, "하이네스 워리어헬름", 58, 68000));
-		itemList.add(new Item(2, "앱솔 판금갑옷", 79, 88000));
+		itemList.add(new Item(2, "앱솔루트 판금갑옷", 79, 88000));
 		
 		itemList.add(new Item(3, "낡은 목걸이", 15, 7000));
 		itemList.add(new Item(3, "보석 반지", 50, 1200));

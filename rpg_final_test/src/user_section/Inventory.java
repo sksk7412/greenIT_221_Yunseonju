@@ -15,7 +15,7 @@ public class Inventory {
 		
 			System.out.println(" === [인벤토리 메뉴] === ");
 			System.out.printf("[Player Money: %d]\n",Player.money);
-			System.out.println("[1.인벤토리 출력][2.아이템 착용][3.아이템 판매(세금50%)][4.장비 강화][0.뒤로가기]");
+			System.out.println("[1.인벤토리 출력] [2.아이템 착용] [3.아이템 판매(세금50%)] [4.장비 강화] [0.뒤로가기]");
 			int sel = Party.in.nextInt();
 			
 			if(sel == 1) printInvenList();
@@ -231,6 +231,7 @@ public class Inventory {
 				System.out.println(" [비어있음] ");
 		}
 	
+	//아이템 판매
 	private void sellItem() {
 
 		printInvenList();
