@@ -20,10 +20,10 @@ public class Shop{
 		itemList.add(new Item(2, "하이네스 워리어헬름", 58, 68000));
 		itemList.add(new Item(2, "앱솔루트 판금갑옷", 79, 88000));
 		
-		itemList.add(new Item(3, "낡은 목걸이", 15, 7000));
-		itemList.add(new Item(3, "보석 반지", 50, 1200));
-		itemList.add(new Item(3, "하프 이어링", 80, 66000));
-		itemList.add(new Item(3, "아쿠아리움 반지", 100, 99000));
+		itemList.add(new Item(3, "낡은 목걸이", 250, 7000));
+		itemList.add(new Item(3, "보석 반지", 300, 1200));
+		itemList.add(new Item(3, "하프 이어링", 444, 66000));
+		itemList.add(new Item(3, "아쿠아리움 반지", 666, 99000));
 	}
 	// 메뉴 출력
 	public void store() {
