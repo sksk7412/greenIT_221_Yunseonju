@@ -9,7 +9,7 @@ public class Special_slime extends Unit{
 	
 	public static Random ran = new Random();
 	private int lv = 10;
-	private int hp = 1500;
+	private int hp = 600;
 	private int power = 300;
 	private int def = 20;
 	

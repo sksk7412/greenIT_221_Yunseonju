@@ -6,9 +6,9 @@ public class MonsterManager {
 	
 	private static MonsterManager instance = new MonsterManager();
 	private String[][] monsterName = {
-			{"Green_slime","Red_slime","Special_slime"},
-			{"Green_goblin","Red_goblin","Special_goblin"},
-			{"Green_ork","Red_ork","Special_ork"}};
+			{"Green_slime","Red_slime","Special_slime","Boss_slime"},
+			{"Green_goblin","Red_goblin","Special_goblin","Boss_goblin"},
+			{"Green_ork","Red_ork","Special_ork","Boss_ork"}};
 	
 	private String path = "monster.";
 	private static ArrayList<Unit> monsterList;
@@ -17,7 +17,7 @@ public class MonsterManager {
 		int size = 5;
 		monsterList = new ArrayList<>(); 
 		
-		for(int i = 0; i < size-1; i++) {
+		for(int i = 0; i < size; i++) {
 			int ranInt = Lobby.ran.nextInt(monsterName[sel].length);
 			
 			try {	

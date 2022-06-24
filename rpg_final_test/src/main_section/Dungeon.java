@@ -157,21 +157,20 @@ public class Dungeon {
 					
 			for(int i = 0; i < Party.partyList.size(); i++) {
 				Unit temp = Party.partyList.get(i);
-				int num = temp.getWeapon().getPower();
 				if(temp.getHp() > 0) {
 					
 					//무기 스텟 ++
 					int atk = 0;
-					if(num == 0) {
+					if(temp.getWeapon() == null) {
 						 atk = Lobby.ran.nextInt(temp.getPower()) + 1;
 					}
 					else
-						 atk = Lobby.ran.nextInt(temp.getPower() + num) + 1;
+						 atk = Lobby.ran.nextInt(temp.getPower() + temp.getWeapon().getPower()) + 1;
 					
 					System.out.println("==========================================");
 					System.out.printf("%s 이(가) %d 의 공격력으로 때립니다.\n",temp.name, atk);
 					System.out.println("==========================================");
-					monster.setHp((monster.getHp() + monster.getDef()) - atk);
+					monster.setHp(monster.getHp()  - atk);
 					
 					if(monster.getHp() <= 0) monster.setHp(0);
 					
@@ -205,7 +204,7 @@ public class Dungeon {
 					System.out.printf("%s 이(가) %d 의 공격력으로 때립니다.\n",monster.name, atk);
 					System.out.printf("%s 이(가) 공격을 맞았습니다.\n",hero.name);
 					System.out.println("==========================================");
-					hero.setHp((hero.getHp() + hero.getDef() )- atk);
+					hero.setHp(hero.getHp()- atk);
 					
 					if(hero.getHp() <= 0) hero.setHp(0);
 					System.out.println();

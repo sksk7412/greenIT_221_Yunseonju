@@ -7,7 +7,7 @@ public class Green_slime extends Unit{
 	
 	public static Random ran = new Random();
 	private int lv = 5;
-	private int hp = 1000;
+	private int hp = 300;
 	private int power = 100;
 	private int def = 10;
 	
