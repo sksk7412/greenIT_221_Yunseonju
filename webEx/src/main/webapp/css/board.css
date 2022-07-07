@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    margin: 10% 0 30px 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3em;
+    color: #76BA99;
+}
+
+.boardListContainer, formContainer {
+    width: 80vw; /* */
+}
+
+table {
+    border-collapse: collapse;
+    border-color: lightblue;
+}
+
+input#title {
+    width: 70vw;
+}
+
+textarea {
+    width: 70vw;
+    height: 50vh;
+}
+
+input, textarea {
+    padding: 20px;
+    margin: 5px;
+    border: solid 1px lightblue;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+}

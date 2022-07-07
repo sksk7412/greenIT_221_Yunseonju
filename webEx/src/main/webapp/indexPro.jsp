@@ -29,17 +29,21 @@
 		System.out.print(password);
 		
 		UserDTO us = new UserDTO(id,password);
-		boolean check = UserDAO.getInstance().loginUser(id, password);
+		UserDAO userdao = UserDAO.getInstance();
 		
 		
-	//	String logs = UserDAO.getInstance().getLog();
+		// String log = UserDAO.getInstance().getLog();
 		
-		if(check){
-			System.out.println("김동호");
-			session.setAttribute("log", us.getId());		
+		if(userdao.loginUser(id, password)){
+			
+			
+			session.setAttribute("log", id);
+		
 			response.sendRedirect("_04.main.jsp");
 		}
-		
+		else{	
+			response.sendRedirect("_00.index.jsp");
+		}
 		  // 1. 단순 리다이렉트
 		   // response.sendRedirect(url);
 		   

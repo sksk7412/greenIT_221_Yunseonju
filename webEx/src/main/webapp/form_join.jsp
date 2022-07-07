@@ -14,8 +14,8 @@
 <body>
 		
     <h1>GREEN</h1>
-    <form method = "post" action="_00.index.jsp">
-        <div class="contents">s
+    <form method = "post" action="joinPro.jsp">
+        <div class="contents">
             <input class="req"name = "id" type="text" placeholder="id">
             <span class="warning"><br>필수값 입력 바랍니다.</span>
             <div>

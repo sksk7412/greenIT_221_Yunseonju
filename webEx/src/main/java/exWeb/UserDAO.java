@@ -10,6 +10,9 @@ import java.util.ArrayList;
 
 import javax.xml.crypto.Data;
 
+import util.DBmanager;
+
+
 public class UserDAO {
 	// �̱���
 //	ArrayList<UserDTO> list = null;
@@ -27,26 +30,31 @@ public class UserDAO {
 	private ResultSet rs = null;
 	private PreparedStatement pstmt = null;
 	private String log;
-	private String url = "jdbc:mysql://localhost:3306/firstjsp";
+	private String url = "jdbc:mysql://localhost:3306/";
+	private String database = "firstjsp";
 	private String user = "root";
 	private String password = "root";
 	
-	public Connection getConnection() {
-		
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection(url, user, password);
-			return conn;
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
+//	public Connection getConnection() {
+//		
+//		try {
+//			Class.forName("com.mysql.cj.jdbc.Driver");
+//			conn = DriverManager.getConnection(url, user, password);
+//			System.out.println("DB 연동 성공~");
+//			return conn;
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			System.out.println("DB 연동 실패");
+//			return null;
+//		}
+//	}
 	
 	public int addUser(UserDTO userDto) {
 		
-		conn = getConnection();
+		conn = DBmanager.getConnection(database);
+		
+		System.out.println("conn: "+conn);
 		
 		String SQL = "INSERT INTO users VALUES (?,?,?,?,?,?,?,?)";
 		Date date = new Date(userDto.getYear()-1900, userDto.getMonth(), userDto.getDay());
@@ -77,15 +85,28 @@ public class UserDAO {
 	
 	// 로그인 (맞나?)
 	public boolean loginUser(String id, String pw) {
-		conn = getConnection();
 		
-		String str = "select name from users where id = '"+ id +"' and password = '"+ pw +"'";
+		conn = DBmanager.getConnection(database);
 		
+		//String str = "select name from users where id = '"+ id +"' and password = '"+ pw +"'";
+	//	select name from users where id = "" and password = "";
+//		String str = "select * from firstjsp.users where id = ? and password = ? ";
+		String str = "select * from users where id = ? and password = ?";
+
 		try {
+
 			pstmt = conn.prepareStatement(str);
+			
+			pstmt.setString(1, id);
+			pstmt.setString(2, pw);
+			
+			System.out.println("id: " + id);
+			System.out.println("password: " + pw);
+			
 			rs = pstmt.executeQuery();
+			
 			if(rs.next()) {
-				System.out.println("ㅁㄴㅇ");
+			
 				log = rs.getString(1);
 				pstmt.close();
 				rs.close();
