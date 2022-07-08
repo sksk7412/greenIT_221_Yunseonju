@@ -16,7 +16,7 @@
 <body>
 
 	  <h1>N A V E R</h1>
-	   <form method = "post" action="indexPro.jsp">
+	   <form method = "post" action="./LoginAction">
 	   
 		   <input class="req" name = "id" type="text" placeholder="id" title="아이디를 입력하세요" required >
 		   <input class="req" name = "password" type="text" placeholder="password" title="비밀번호를 입력하세요" required >

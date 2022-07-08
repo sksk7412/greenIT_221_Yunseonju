@@ -104,6 +104,46 @@ public class BoardDAO {
 		return -1;
 	}
 	
+	//코드에 맞는 bto를 가져와준다.	
+	public BoardDTO getBoard(int checkCode) {
+	
+		conn = DBmanager.getConnection("firstjsp");
+		String sql = "select * from board";
+		pstmt = null;
+		
+		try {
+			BoardDTO bd  = null;
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			int no, code, viewCnt, likeCnt;
+			String title, content;
+			Timestamp createdAt;
+			Timestamp modifiedAt;
+			
+			while (rs.next()) {
+				if(rs.getInt(2) == checkCode) {
+					no = rs.getInt(1);
+					code = rs.getInt(2);
+					title = rs.getString(3);
+					content = rs.getString(4);
+					viewCnt = rs.getInt(5);
+					likeCnt = rs.getInt(6);
+					createdAt = rs.getTimestamp(7);
+					modifiedAt = rs.getTimestamp(8);
+									
+					bd = new BoardDTO(no, code, title, content, viewCnt, likeCnt, createdAt, modifiedAt);
+					return bd;
+				}
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
+	
 	//code 값
 	public int getCode() {
 			int code = ran.nextInt(8999)+1000;

@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>	
-
+ 
 	<h1> 환영합니다.</h1>
 	<% 
 		UserDAO dao = UserDAO.getInstance();
@@ -33,7 +33,7 @@
 		//	else{
 				//회원 가입 성공
 				//login.jsp 로 이동
-		//		url = "_00.index.jsp";
+		//		url = "_00.index.jsp";     
 		//	}
 			
 			response.sendRedirect(url);

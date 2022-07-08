@@ -15,11 +15,11 @@ import util.DBmanager;
 
 public class UserDAO {
 	// �̱���
-//	ArrayList<UserDTO> list = null;
+	ArrayList<UserDTO> list = null;
 	//데이터 베이스 연동 후 , 유저 관리
 	
 	private UserDAO() {
-//		list = new ArrayList<UserDTO>();
+		list = new ArrayList<UserDTO>();
 	}
 	private static UserDAO instance = new UserDAO();
 	public static UserDAO getInstance() {
@@ -148,14 +148,14 @@ public class UserDAO {
 //		return -1;
 //	}
 //	
-//	public boolean loginCheck(UserDTO userDto) {
-//		for(UserDTO user: this.list) {
-//			if(user.getId().equals(userDto.getId())) {
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
+	public boolean loginCheck(UserDTO userDto) {
+		for(UserDTO user: this.list) {
+			if(user.getId().equals(userDto.getId())) {
+				return true;
+			}
+		}
+		return false;
+	}
 //	
 //	public boolean checkDupl(String id) {
 //		

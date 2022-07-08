@@ -39,8 +39,7 @@
 					BoardDAO bDao = BoardDAO.getInstance();
 					Map<Integer, BoardDTO> temp = bDao.getMap();
 					Object[] keySet = temp.keySet().toArray();
-						//int no = 0;
-						//int code = 0;
+					
 						int no = 0; 
 						int code = 0; 
 						String title = null;
@@ -64,19 +63,33 @@
 							System.out.println("title : "+title);
 							System.out.println("content : "+content);
 					%>
-					<tr>
-					<td><%=no%></td>
-					<td><%=code%></td>
-					<td><%=title%></td>
-					<td><%=content%></td>
-					<td><%=viewCnt%></td>
-					<td><%=likeCnt%></td>
-					<td><%=createdAt%></td>
-					<td><%=modifiedAt%></td>
-					<%
-					}
-					%>
-				</tr>
+					
+						<tr>
+							<td><%=no%></td>
+							<td><%=code%></td>	
+							<td><a href="_08.boardVIew.jsp?code=<%=code%>"><%=title%></a></td>
+							<td><%=content%></td>
+							<td><%=viewCnt%></td>
+							<td><%=likeCnt%></td>
+							<td><%=createdAt%></td>				
+							<%
+								if(modifiedAt != null){%>
+									<td><%=modifiedAt%></td>
+								<% 	
+								}
+								else{%>
+									<td> </td>
+								<%
+								}
+							%>
+						</tr>
+					
+					
+						<%
+						}
+						%>
+				
+				  
 			</tbody>
 		</table>
 		    <button onclick = "location.href ='_06.boardWriteForm.jsp'">작성하기</button>

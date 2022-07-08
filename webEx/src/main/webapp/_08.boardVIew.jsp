@@ -1,3 +1,6 @@
+
+<%@page import="exWeb.BoardDAO"%>
+<%@page import="exWeb.BoardDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -10,18 +13,48 @@
     <title>BOARD CONTENTS</title>
 </head>
 <body>
+     	<%
+     	
+     	BoardDAO dao = BoardDAO.getInstance();
+     	int code = -1;
+     	
+     	if(request.getParameter("code") != null) {
+     		code = Integer.valueOf(request.getParameter("code"));
+     	}
+     	
+     	String title = "";
+     	String contents = "";
+     	
+     	if (code != -1) {
+     		BoardDTO board = dao.getBoard(code);
+     			
+     		title = board.getTitle();
+     		contents = board.getContents();		
+  		
+     	}
+     	
+    	%>
+    	
     <h1>GREEN BOARD</h1>
     <div class="formContainer">
-        <form>
-        
+        <form method = "post" action="">
             <input type="text" id="title" name="title"
-            value="<%=로딩된타이틀%>" required><br>
+            value="<%=title%>" required><br>
             <textarea name="contents"
-             required readonly><%=로딩된콘텐츠%></textarea><br>
-            <input type="button" value="뒤로가기">
-            <input type="button" value="수정하기">
+             required readonly><%=contents%></textarea><br>
+
+            <input type="button" value="뒤로가기" onclick="location.href = '_05.board.jsp'">
+            <input type="submit" value="수정하기">
         </form>
 
     </div>
 </body>
 </html>
+
+
+
+
+
+
+
+
