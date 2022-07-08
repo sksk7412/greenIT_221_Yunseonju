@@ -1,28 +1,28 @@
 package controller;
 
 import java.io.IOException;
+import java.util.Random;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import exWeb.UserDAO;
-import exWeb.UserDTO;
-
+import exWeb.BoardDAO;
+import exWeb.BoardDTO;
 
 /**
- * Servlet implementation class LoginAction
+ * Servlet implementation class writesAction
  */
-//@WebServlet("/LoginAction")
-public class LoginAction extends HttpServlet {
+//@WebServlet("/writesAction")
+public class writesAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginAction() {
+    public writesAction() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,36 +34,43 @@ public class LoginAction extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		//doGet() 메소드: http request method - GET
-		
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
+		Random ran = new Random();
+		int check = -1;
+		int size = BoardDAO.getInstance().getSize();
+		int code = BoardDAO.getInstance().getCode();
+		int viewCnt;
+		int likeCnt;
+		BoardDTO user = null;
+		BoardDAO temp = BoardDAO.getInstance();
 		
-		HttpSession session = request.getSession();
-		String id = request.getParameter("id");
-		System.out.print(id);
-		String password = request.getParameter("password");
-		System.out.print(password);
 		
-		UserDTO us = new UserDTO(id,password);
-		UserDAO userdao = UserDAO.getInstance();
+		String title = request.getParameter("title");
+		String contents = request.getParameter("contents");
+		
+		System.out.println("title:" + title);
+		System.out.println("contents: " + contents);
 		
 		
-		// String log = UserDAO.getInstance().getLog();
-		String url = "";
-		if(userdao.loginUser(id, password)){
-			session.setAttribute("log", id);
+		user = new BoardDTO(size,code,title,contents,0,0);	
+	 		
+		check = temp.addWrite(user);
+		
+		String url ="";
+		if(check != -1){
 			
-			url = "./board/_04.main.jsp";
-			
+			System.out.println("등록 성공");
+			url = "./board/_05.board.jsp";
+		
 		}
-		else{	
-			url = "_00.index.jsp";
-		
+		else{
+			System.out.println("등록 실패");
+			url = "./board/_06.boardWriteForm.jsp";
+
 		}
-			
+
 		request.getRequestDispatcher(url).forward(request, response);
-		
 	}
 
 	/**
@@ -71,11 +78,7 @@ public class LoginAction extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		//doPost() 메소드: http request method - post
-	
 		doGet(request, response);
-	
 	}
 
 }

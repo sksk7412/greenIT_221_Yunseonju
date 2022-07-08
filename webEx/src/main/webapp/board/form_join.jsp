@@ -14,7 +14,7 @@
 <body>
 		
     <h1>GREEN</h1>
-    <form method = "post" action="joinPro.jsp">
+    <form method = "post" action="./joinAction">
         <div class="contents">
             <input class="req"name = "id" type="text" placeholder="id">
             <span class="warning"><br>필수값 입력 바랍니다.</span>
@@ -43,7 +43,7 @@
         </div>
 
         <div class="buttons">
-            <input type="button" value="뒤로" onclick="location.href = 'form_agree.jsp'">
+            <input type="button" value="뒤로" onclick="location.href = './agree'">
             <input type="button" value="확인" onclick="checkJoinVal(form)">
         </div>
     </form>

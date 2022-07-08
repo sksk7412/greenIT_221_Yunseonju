@@ -4,13 +4,14 @@
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
+    <welcome-file>_00.index.jsp</welcome-file>
+    <welcome-file>default.htm</welcome-file>
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
   <!-- 서블릿 페이지에대 한 url 맵핑 -->
+  <!-- mapping은 key 값과 같은거다 이름을 지정해 주고 name에서 value 값으로 위치를 지정한다. -->
   <servlet>
   	<servlet-name>login</servlet-name>
   	<servlet-class>controller.LoginAction</servlet-class>
@@ -20,13 +21,70 @@
   	<url-pattern>/login</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  	<servlet-name>joinAction</servlet-name>
+  	<servlet-class>controller.joinAction</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>joinAction</servlet-name>
+  	<url-pattern>/joinAction</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+  	<servlet-name>writesAction</servlet-name>
+  	<servlet-class>controller.writesAction</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>writesAction</servlet-name>
+  	<url-pattern>/writesAction</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+  	<servlet-name>write</servlet-name>
+  	<jsp-file>/board/_06.boardWriteForm.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>write</servlet-name>
+  	<url-pattern>/write</url-pattern>
+  </servlet-mapping>
+  
+ <servlet>
+  	<servlet-name>logout</servlet-name>
+  	<jsp-file>/board/_00.logout.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>logout</servlet-name>
+  	<url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+  	<servlet-name>agree</servlet-name>
+  	<jsp-file>/board/form_agree.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>agree</servlet-name>
+  	<url-pattern>/agree</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+  	<servlet-name>join</servlet-name>
+  	<jsp-file>/board/form_join.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>join</servlet-name>
+  	<url-pattern>/join</url-pattern>
+  </servlet-mapping>
+  
+  
    <!-- jsp 페이지에 대한 url 맵핑 -->
    <servlet>
   	<servlet-name>board</servlet-name>
-  	<servlet-class>/board/_05.board.jsp</servlet-class>
+  	<jsp-file>/board/_05.board.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
   	<servlet-name>board</servlet-name>
   	<url-pattern>/board</url-pattern>
   </servlet-mapping>
+  
+  
 </web-app>

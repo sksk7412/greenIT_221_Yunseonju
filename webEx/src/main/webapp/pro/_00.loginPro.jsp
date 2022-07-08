@@ -10,7 +10,6 @@
 </head>
 <body>	
  
-	<h1> 환영합니다.</h1>
 	<% 
 		UserDAO dao = UserDAO.getInstance();
 		//	UserDTO user = null;

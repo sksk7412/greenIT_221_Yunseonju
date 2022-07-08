@@ -92,7 +92,7 @@
 				  
 			</tbody>
 		</table>
-		    <button onclick = "location.href ='_06.boardWriteForm.jsp'">작성하기</button>
+		    <button onclick = "location.href ='./write'">작성하기</button>
 	</div>
 </body>
 </html>

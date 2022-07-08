@@ -6,23 +6,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import exWeb.UserDAO;
 import exWeb.UserDTO;
 
-
 /**
- * Servlet implementation class LoginAction
+ * Servlet implementation class agreeAction
  */
-//@WebServlet("/LoginAction")
-public class LoginAction extends HttpServlet {
+//@WebServlet("/joinAction")
+public class joinAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginAction() {
+    public joinAction() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,36 +32,46 @@ public class LoginAction extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		//doGet() 메소드: http request method - GET
-		
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
+		int check = -1;
+		UserDTO user = null;
+		UserDAO temp = UserDAO.getInstance();
 		
-		HttpSession session = request.getSession();
 		String id = request.getParameter("id");
-		System.out.print(id);
 		String password = request.getParameter("password");
-		System.out.print(password);
+		String name = request.getParameter("name");
+		int year = Integer.parseInt(request.getParameter("year"));
+		int month = Integer.parseInt(request.getParameter("month"));
+		int day = Integer.parseInt(request.getParameter("day"));
+		String gender = request.getParameter("gender");
+		String email = request.getParameter("email");
+		String country = request.getParameter("country");
+		String mobile = request.getParameter("mobile");
 		
-		UserDTO us = new UserDTO(id,password);
-		UserDAO userdao = UserDAO.getInstance();
+		user = new UserDTO(id,password,name,year,month,day,gender,email,country,mobile);	
+	 	
+		System.out.println(gender);
 		
-		
-		// String log = UserDAO.getInstance().getLog();
-		String url = "";
-		if(userdao.loginUser(id, password)){
-			session.setAttribute("log", id);
+		 check = temp.addUser(user);
 			
-			url = "./board/_04.main.jsp";
+		System.out.println(check);
+
+				String url = "";
+				
+				if(check == -1){	
+					System.out.println("회원 가입 실패");
+					url = "join.jsp";
+				}
+				else{
+					System.out.println("회원 가입 성공");
+					url = "_00.index.jsp";
+				}
+				
 			
-		}
-		else{	
-			url = "_00.index.jsp";
-		
-		}
+				
+			request.getRequestDispatcher(url).forward(request, response);
 			
-		request.getRequestDispatcher(url).forward(request, response);
-		
 	}
 
 	/**
@@ -71,11 +79,7 @@ public class LoginAction extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		//doPost() 메소드: http request method - post
-	
 		doGet(request, response);
-	
 	}
 
 }

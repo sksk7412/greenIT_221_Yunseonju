@@ -14,8 +14,8 @@
 	String log = (String) session.getAttribute("log");
 	%>
 	<h2> <%=log %>님 환영합니다.</h2> 
-	<button onclick="location.href = '_05.board.jsp'">게시판 이동</button>
-	<button onclick="location.href = '_00.logout.jsp'">로그아웃</button>
+	<button onclick="location.href = './board'">게시판 이동</button>
+	<button onclick="location.href = './logout'">로그아웃</button>
 	
 </body>
 </html>
