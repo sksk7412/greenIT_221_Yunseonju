@@ -63,27 +63,7 @@
 							System.out.println("title : "+title);
 							System.out.println("content : "+content);
 					%>
-					
-						<tr>
-							<td><%=no%></td>
-							<td><%=code%></td>	
-							<td><a href="_08.boardVIew.jsp?code=<%=code%>"><%=title%></a></td>
-							<td><%=content%></td>
-							<td><%=viewCnt%></td>
-							<td><%=likeCnt%></td>
-							<td><%=createdAt%></td>				
-							<%
-								if(modifiedAt != null){%>
-									<td><%=modifiedAt%></td>
-								<% 	
-								}
-								else{%>
-									<td> </td>
-								<%
-								}
-							%>
-						</tr>
-					
+						
 					
 						<%
 						}

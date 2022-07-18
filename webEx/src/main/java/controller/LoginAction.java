@@ -52,6 +52,7 @@ public class LoginAction extends HttpServlet {
 		// String log = UserDAO.getInstance().getLog();
 		String url = "";
 		if(userdao.loginUser(id, password)){
+			
 			session.setAttribute("log", id);
 			
 			url = "./board/_04.main.jsp";
